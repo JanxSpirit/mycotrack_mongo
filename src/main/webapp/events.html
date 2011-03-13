@@ -1,0 +1,29 @@
+<lift:surround with="default" at="content">
+    <h2><lift:projectEvents.projectName /></h2>
+
+    <p>
+    <lift:editProject.edit form="POST" >
+            <entry:species /><br />
+            <entry:name /><br />
+            <entry:createdDate /><br />
+            <entry:submit />
+        </lift:editProject.edit>
+    <p></p>
+    <ul>
+        <lift:projectEvents.addEvent />
+        <br />
+            <lift:projectEvents.list>
+                <event:name />
+                <event:edit />
+                <event:remove />
+                <br />
+            </lift:projectEvents.list>
+        </ul>
+
+    <!--<lift:projectItems.showAddItem form="POST" />
+    <lift:projectItems.showEditItem form="POST" />-->
+    <br />
+    <br />
+    <!--<lift:ProjectWizard />-->
+    </p>
+</lift:surround>

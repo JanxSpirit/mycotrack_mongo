@@ -1,0 +1,30 @@
+<lift:surround with="default" at="content">
+    <h2>Manage projects</h2>
+
+    <p>
+    <lift:projectItems.addLink />
+        <table id="myTable" border="1">
+
+    <tr>
+                    <th>Name</th>
+                    <th>Species</th>
+                    <th>Created Date</th>
+                    <th>Remove</th>
+                </tr>
+            <lift:projectItems.list>
+                <tr>
+                    <td><project:name /></td>
+                    <td><project:species /></td>
+                    <!--<td><project:createdDate /></td>-->
+                    <td><project:remove /></td>
+                </tr>
+            </lift:projectItems.list>
+    </table>
+
+    <!--<lift:projectItems.showAddItem form="POST" />
+    <lift:projectItems.showEditItem form="POST" />-->
+    <br />
+    <br />
+    <!--<lift:ProjectWizard />-->
+    </p>
+</lift:surround>

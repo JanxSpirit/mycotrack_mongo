@@ -1,0 +1,16 @@
+<lift:surround with="default" at="content">
+    <h2>Create new event</h2>
+
+    <p>
+        <lift:createEvent.add form="POST" >
+            <event:eventType />
+            <event:submit />
+        </lift:createEvent.add>
+
+    <!--<lift:projectItems.showAddItem form="POST" />
+    <lift:projectItems.showEditItem form="POST" />-->
+    <br />
+    <br />
+    <!--<lift:ProjectWizard />-->
+    </p>
+</lift:surround>
