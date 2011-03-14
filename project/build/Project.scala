@@ -18,6 +18,8 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
     // jetty
     val jetty6 = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test"
     val servletApi = "org.mortbay.jetty" % "servlet-api" % "2.5-20081211" % "provided"
+    val logback = "ch.qos.logback" % "logback-classic" % "0.9.268" % "compile->default"
+
     //lazy val jetty = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test->default"
     //"junit" % "junit" % "4.5" % "test->default",
     //"org.scala-tools.testing" %% "specs" % "1.6.7.2" % "test->default",
