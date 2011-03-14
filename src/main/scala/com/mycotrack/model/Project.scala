@@ -25,9 +25,9 @@ class Project extends MongoRecord[Project] with MongoId[Project] {
     def obj = User.find(value)
   }
 
-  /*object events extends MongoCaseClassListField[Project, Event](this) {
+  object notes extends MongoCaseClassListField[Project, Note](this) {
 
-  } */
+  }
 }
 
 object Project extends Project with MongoMetaRecord[Project] {

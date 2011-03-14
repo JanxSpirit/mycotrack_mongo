@@ -1,0 +1,14 @@
+<lift:surround with="default" at="content">
+    <h2>Create new note</h2>
+
+    <p>
+        <lift:projectNotes.add form="POST" >
+            <note:name />
+            <note:body />
+            <note:submit />
+        </lift:projectNotes.add>
+
+    <br />
+    <br />
+    </p>
+</lift:surround>

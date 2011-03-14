@@ -18,6 +18,7 @@ class EditProject {
   def edit(xhtml: NodeSeq): NodeSeq = {
     val proj = SelectedProject.is.open_!
     var name = proj.name.is
+    var notes = proj.notes
     //var species = proj.species.is
     //var createdDate = proj.createdDate
 

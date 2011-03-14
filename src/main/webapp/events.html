@@ -9,16 +9,27 @@
             <entry:submit />
         </lift:editProject.edit>
     <p></p>
-    <ul>
+    <!--<ul>
         <lift:projectEvents.addEvent />
         <br />
-            <lift:projectEvents.list>
-                <event:name />
-                <event:edit />
-                <event:remove />
-                <br />
-            </lift:projectEvents.list>
-        </ul>
+        <lift:projectEvents.list>
+            <event:name />
+            <event:edit />
+            <event:remove />
+            <br />
+        </lift:projectEvents.list>
+    </ul>-->
+    <ul>
+        <lift:projectNotes.addNote />
+        <br />
+        <lift:projectNotes.list>
+            <event:name />
+            <event:body />
+            <event:edit />
+            <event:remove />
+            <br />
+        </lift:projectNotes.list>
+    </ul>
 
     <!--<lift:projectItems.showAddItem form="POST" />
     <lift:projectItems.showEditItem form="POST" />-->
