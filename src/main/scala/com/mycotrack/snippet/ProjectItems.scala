@@ -47,7 +47,7 @@ class ProjectItems {
       var id = SelectedProject.get.open_!.id
       val project = Project.find(id).open_!
 
-      var name = project.name.toString
+      var name = project.name.is
       var species = project.species.is
 
       val template = TemplateFinder.findAnyTemplate(ITEM_TEMPLATE :: Nil).openOr(<p></p>)
@@ -69,10 +69,8 @@ class ProjectItems {
   def list(node: NodeSeq): NodeSeq = {
     Project.findAll match {
       case Nil => Text("There is no items in database")
-      case projects => projects.flatMap(i => bind("project", node, "name" -> getAddEventLink(i),
-        "species" -> {
-          i.species
-        },
+      case projects => projects.flatMap(i => bind("project", node, "name" -> getEditLink(i),
+        "species" -> i.species.is,
 //        "createdDate" -> {
 //          i.createdDate
 //        },
@@ -104,9 +102,7 @@ class ProjectItems {
   }
 
   private def getEditLink(project: Project): NodeSeq = {
-    SHtml.link("create", () => {
-      SelectedProject(Full(project))
-    }, Text("edit"))
+    SHtml.link("events", () => {SelectedProject(Full(project))}, Text(project.name.is))
   }
 
   private def getAddEventLink(project: Project): NodeSeq = {

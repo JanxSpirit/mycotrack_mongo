@@ -9,7 +9,7 @@
   </appender>
 
 <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>/var/log/mycotrack.log</file>
+    <file>/var/log/mycotrack/mycotrack.log</file>
 
     <encoder>
       <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>

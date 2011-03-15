@@ -5,7 +5,7 @@ import _root_.net.liftweb.util.Helpers
 import net.liftweb.http.{S, SHtml}
 import Helpers._
 import com.mycotrack.model.{Species, Project}
-import net.liftweb.common.Full
+import net.liftweb.common.{Full, Empty}
 
 /**
  * @author chris_carrier
@@ -19,13 +19,13 @@ class EditProject {
     val proj = SelectedProject.is.open_!
     var name = proj.name.is
     var notes = proj.notes
-    //var species = proj.species.is
-    //var createdDate = proj.createdDate
+    //var species: Species = proj.species.obj.open_!
+    var createdDate = proj.createdDate.is
 
     Helpers.bind("entry", xhtml,
-      //"species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Full(species), species = _),
+      "species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
       "name" -> SHtml.text(name, name = _),
-//      "createdDate" -> createdDate._toForm,
+      //"createdDate" -> createdDate._toForm,
       "submit" -> SHtml.submit("Add", () => {
         proj.name(name);
         //proj.species(species);
