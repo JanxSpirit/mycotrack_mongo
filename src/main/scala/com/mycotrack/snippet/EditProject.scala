@@ -5,7 +5,7 @@ import _root_.net.liftweb.util.Helpers
 import net.liftweb.http.{S, SHtml}
 import Helpers._
 import com.mycotrack.model.{Species, Project}
-import net.liftweb.common.{Full, Empty}
+import net.liftweb.common.{Logger, Full, Empty}
 
 /**
  * @author chris_carrier
@@ -13,7 +13,7 @@ import net.liftweb.common.{Full, Empty}
  */
 
 
-class EditProject {
+class EditProject extends Logger {
 
   def edit(xhtml: NodeSeq): NodeSeq = {
     val proj = SelectedProject.is.open_!
@@ -21,9 +21,14 @@ class EditProject {
     var notes = proj.notes
     //var species: Species = proj.species.obj.open_!
     var createdDate = proj.createdDate.is
+    
+    val speciesList = Species.findAll
+    
+
+    //info("Found species from Mongo:" + speciesList);
 
     Helpers.bind("entry", xhtml,
-      "species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
+      "species" -> SHtml.select(speciesList.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
       "name" -> SHtml.text(name, name = _),
       //"createdDate" -> createdDate._toForm,
       "submit" -> SHtml.submit("Add", () => {

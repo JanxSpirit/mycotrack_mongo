@@ -28,7 +28,7 @@ class ProjectEvents {
                                                                 "remove" -> getRemoveLink(e, project)))
         }
 
-  }
+  }*/
 
   def projectName(node: NodeSeq): NodeSeq = {
     val project = SelectedProject.is.open_!
@@ -36,7 +36,7 @@ class ProjectEvents {
     <span>Project: {project.name}</span>
   }
 
-  def addEvent(node: NodeSeq): NodeSeq = {
+  /*def addEvent(node: NodeSeq): NodeSeq = {
     val project = SelectedProject.is.open_!
 
     SHtml.link("createEvent", () => {SelectedProject(Full(project))}, Text("new event"))

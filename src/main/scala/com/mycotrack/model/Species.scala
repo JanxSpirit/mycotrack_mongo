@@ -18,4 +18,6 @@ class Species extends MongoRecord[Species] with MongoId[Species] {
 
 object Species extends Species with MongoMetaRecord[Species] {
   //override def fieldOrder = List(commonName, scientificName)
+
+  override def collectionName="species"
 }
