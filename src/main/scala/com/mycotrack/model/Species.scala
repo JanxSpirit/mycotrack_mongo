@@ -14,6 +14,10 @@ class Species extends MongoRecord[Species] with MongoId[Species] {
   object scientificName extends StringField(this,100){
     override def displayName = "Scientific Name"
   }
+
+  object infoUrl extends StringField(this,100){
+    override def displayName = "Link"
+  }
 }
 
 object Species extends Species with MongoMetaRecord[Species] {

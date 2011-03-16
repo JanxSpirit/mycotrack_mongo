@@ -6,6 +6,9 @@ import net.liftweb.http.{S, SHtml}
 import Helpers._
 import com.mycotrack.model.{Species, Project}
 import net.liftweb.common.{Logger, Full, Empty}
+import net.liftweb.mongodb.{JsonObject, JsonObjectMeta}
+import com.mongodb._
+import com.mongodb.casbah.Imports._
 
 /**
  * @author chris_carrier
@@ -25,7 +28,7 @@ class EditProject extends Logger {
     val speciesList = Species.findAll
     
 
-    //info("Found species from Mongo:" + speciesList);
+    info("Found species from Mongo:" + speciesList);
 
     Helpers.bind("entry", xhtml,
       "species" -> SHtml.select(speciesList.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),

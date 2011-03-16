@@ -1,12 +1,14 @@
 package com.mycotrack.snippet
 
 import xml.{Text, NodeSeq}
-import com.mycotrack.model.Project
+import com.mycotrack.model.{Project, Species}
 import net.liftweb.http.{RequestVar, S, TemplateFinder, SHtml}
 import net.liftweb.util.{Helpers, Log}
 import Helpers._
-import net.liftweb.common.{Full, Empty, Box}
+import net.liftweb.common.{Full, Empty, Box, Logger}
 import org.bson.types.ObjectId
+import com.mongodb._
+import com.mongodb.casbah.Imports._
 
 /**
  * @author chris_carrier
@@ -14,7 +16,7 @@ import org.bson.types.ObjectId
  */
 
 
-class ProjectItems {
+class ProjectItems extends Logger {
 
   private val ITEM_TEMPLATE = "templates-hidden/project_item"
 
@@ -70,7 +72,7 @@ class ProjectItems {
     Project.findAll match {
       case Nil => Text("There is no items in database")
       case projects => projects.flatMap(i => bind("project", node, "name" -> getEditLink(i),
-        "species" -> i.species.is,
+        "species" -> speciesLink(i.species.is),
 //        "createdDate" -> {
 //          i.createdDate
 //        },
@@ -82,6 +84,13 @@ class ProjectItems {
     SHtml.link("create", () => {}, Text("New Project"))
   }
 
+  def speciesLink(commonName: String): NodeSeq = {
+    val species = Species.find(MongoDBObject("commonName" -> "shiitake")).open_!
+    val url = "http://" + species.infoUrl.is
+    info("Got species link: " + url)
+
+    <span><a href={url}>{species.commonName.is}</a></span>
+  }
 
   private def addItem(name: String): Any = {
     val project = new Project

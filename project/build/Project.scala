@@ -15,10 +15,13 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
     val liftmongodbrecord = "net.liftweb" %% "lift-mongodb-record" % liftVersion % "compile->default"
     val liftwidgets = "net.liftweb" %% "lift-widgets" % liftVersion % "compile->default"
     val liftwizard = "net.liftweb" %% "lift-wizard" % liftVersion % "compile->default"
+    val logback = "ch.qos.logback" % "logback-classic" % "0.9.28" % "compile->default"
+    //casbah
+    val casbah = "com.mongodb.casbah" %% "casbah" % "2.0.1"
+
     // jetty
     val jetty6 = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test"
     val servletApi = "org.mortbay.jetty" % "servlet-api" % "2.5-20081211" % "provided"
-    val logback = "ch.qos.logback" % "logback-classic" % "0.9.268" % "compile->default"
 
     //lazy val jetty = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test->default"
     //"junit" % "junit" % "4.5" % "test->default",
