@@ -9,6 +9,7 @@ import net.liftweb.common.{Full, Empty, Box, Logger}
 import org.bson.types.ObjectId
 import com.mongodb._
 import com.mongodb.casbah.Imports._
+import net.liftweb.json.JsonDSL._
 
 /**
  * @author chris_carrier
@@ -85,7 +86,7 @@ class ProjectItems extends Logger {
   }
 
   def speciesLink(commonName: String): NodeSeq = {
-    val species = Species.find(MongoDBObject("commonName" -> "shiitake")).open_!
+    val species = Species.find("commonName" -> "shiitake").open_!
     val url = "http://" + species.infoUrl.is
     info("Got species link: " + url)
 
@@ -111,7 +112,7 @@ class ProjectItems extends Logger {
   }
 
   private def getEditLink(project: Project): NodeSeq = {
-    SHtml.link("events", () => {SelectedProject(Full(project))}, Text(project.name.is))
+    SHtml.link("events", () => {SelectedProject(Full(project)); info("SelectProject is: " + SelectedProject.is.open_!);}, Text(project.name.is))
   }
 
   private def getAddEventLink(project: Project): NodeSeq = {

@@ -12,7 +12,7 @@ package com.mycotrack.db;
 
 object MycoMongoDb {
   	def setup {
-	    MongoDB.defineDb(DefaultMongoIdentifier, MongoAddress(MongoHost("anduin", 27017), "mycotrack"))
+	    MongoDB.defineDb(DefaultMongoIdentifier, MongoAddress(MongoHost("localhost", 27017), "mycotrack"))
 	}
 
 	def isMongoRunning: Boolean = {

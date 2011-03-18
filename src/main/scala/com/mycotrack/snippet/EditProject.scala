@@ -33,8 +33,8 @@ class EditProject extends Logger {
     Helpers.bind("entry", xhtml,
       "species" -> SHtml.select(speciesList.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
       "name" -> SHtml.text(name, name = _),
-      //"createdDate" -> createdDate._toForm,
-      "submit" -> SHtml.submit("Add", () => {
+      //"createdDate" -> createdDate.toForm,
+      "submit" -> SHtml.submit("Submit", () => {
         proj.name(name);
         //proj.species(species);
         proj.save;

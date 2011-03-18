@@ -5,7 +5,7 @@ import net.liftweb.http.{RequestVar, S, TemplateFinder, SHtml}
 import net.liftweb.util.{Helpers, Log}
 import Helpers._
 import com.mycotrack.model.{Event, Project}
-import net.liftweb.common.{Full, Empty, Box}
+import net.liftweb.common.{Logger, Full, Empty, Box}
 
 /**
  * @author chris_carrier
@@ -13,7 +13,7 @@ import net.liftweb.common.{Full, Empty, Box}
  */
 
 
-class ProjectEvents {
+class ProjectEvents extends Logger {
 
   //private object SelectedProject extends RequestVar[Project](Empty)
   /*
@@ -31,9 +31,11 @@ class ProjectEvents {
   }*/
 
   def projectName(node: NodeSeq): NodeSeq = {
+    /*info("SelectProject is full?: " + SelectedProject.is)
     val project = SelectedProject.is.open_!
 
-    <span>Project: {project.name}</span>
+    <span>Project: {project.name}</span>*/
+    <span></span>
   }
 
   /*def addEvent(node: NodeSeq): NodeSeq = {

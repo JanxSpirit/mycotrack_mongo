@@ -1,13 +1,11 @@
 package com.mycotrack.snippet
 
 import xml.{Text, NodeSeq}
-import net.liftweb.http._
-import net.liftweb.common.Empty
-import xml.NodeSeq
-import com.mycotrack.model.{Note, Project}
-import net.liftweb.common.{Full, Empty, Box}
-import net.liftweb.util._
+import net.liftweb.http.{RequestVar, S, TemplateFinder, SHtml}
+import net.liftweb.util.{Helpers, Log}
 import Helpers._
+import net.liftweb.common.{Logger, Full, Empty, Box}
+import com.mycotrack.model.{Note, Event, Project}
 
 /**
  * @author chris_carrier
@@ -15,15 +13,14 @@ import Helpers._
  */
 
 
-class ProjectNotes {
-
-  private object SelectedProject extends RequestVar[Box[Project]](Empty)
+class ProjectNotes extends Logger {
 
   def list(node: NodeSeq): NodeSeq = {
     val project = SelectedProject.is.open_!
     //SelectedProject(project.open_!)
 
     project.notes.get match {
+        case Seq() => Text("There are no notes")
             case n => n.flatMap(i => bind("note", node, "name" -> {i.name},
                                                         "body" -> {i.body},
                                                                 "edit" -> getEditLink(project),
@@ -40,9 +37,10 @@ class ProjectNotes {
   }
 
   def addNote(node: NodeSeq): NodeSeq = {
+    info("SelectProject in notes: " + SelectedProject.is)
     val project = SelectedProject.is.open_!
 
-    SHtml.link("createEvent", () => {SelectedProject(Full(project))}, Text("new event"))
+    SHtml.link("createNote", () => {SelectedProject(Full(project))}, Text("new note"))
   }
 
   private def getEditLink(project: Project): NodeSeq = {
@@ -50,7 +48,7 @@ class ProjectNotes {
     }
 
     private def getRemoveLink(note: Note, project: Project): NodeSeq = {
-        SHtml.link("events", () => {note.delete_!; SelectedProject(Project.find(project.id));}, Text("delete"))
+        SHtml.link("events", () => {SelectedProject(Project.find(project.id));}, Text("delete"))
     }
 
   def add(xhtml: NodeSeq): NodeSeq = {
@@ -65,13 +63,12 @@ class ProjectNotes {
       "body" -> SHtml.text(body, body = _),
 //      "createdDate" -> createdDate._toForm,
       "submit" -> SHtml.submit("Add", () => {
-        val note = new Note
-        note.name(name)
-        note.body(body)
+        val note = new Note(name, body)
 
-        notes :+ note
+        val newList = note :: notes
+        project.notes(newList)
         project.save;
-        S.redirectTo("/manage", () => SelectedProject(Full(project)));
+        S.redirectTo("/events", () => SelectedProject(Full(project)));
       }))
 
     //proj.toForm(Full("save"), {_.save})

@@ -1,7 +1,7 @@
 import sbt._
 
 class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
-  val liftVersion = "2.2"
+  val liftVersion = "2.3-M1"
 
   // uncomment the following if you want to use the snapshot repo
   //val scalatoolsSnapshot = ScalaToolsSnapshots
@@ -18,6 +18,9 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
     val logback = "ch.qos.logback" % "logback-classic" % "0.9.28" % "compile->default"
     //casbah
     val casbah = "com.mongodb.casbah" %% "casbah" % "2.0.1"
+
+  //rogue mongo DSL
+  val rogue = "com.foursquare" %% "rogue" % "1.0.2" % "compile->default"
 
     // jetty
     val jetty6 = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test"

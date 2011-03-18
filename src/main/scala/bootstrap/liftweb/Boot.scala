@@ -39,6 +39,7 @@ object MenuInfo {
       Menu(Loc("createCulture", List("createCulture"), "New Culture", Hidden)),
       Menu(Loc("newProject", List("create"), "New Project", IfLoggedIn)),
       Menu(Loc("createEvent", List("createEvent"), "Create Event", Hidden)),
+      Menu(Loc("createNote", List("createNote"), "Create Note", Hidden)),
       Menu(Loc("events", List("events"), "Add Events", Hidden))) :::
             User.sitemap :::
     List[Menu](Menu("Help") / "help" / "index")
