@@ -23,10 +23,6 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
   //rogue mongo DSL
   //val rogue = "com.foursquare" % "rogue_2.8.0" % "1.0.3" % "compile->default"
 
-  //configgy
-  val TwitterRepo = MavenRepository("Twitter Repository", "http://maven.twttr.com")
-  val configgyConfig = ModuleConfiguration("net.lag", "configgy", "2.0.2", TwitterRepo)
-
   // jetty
   val jetty6 = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test"
   val servletApi = "org.mortbay.jetty" % "servlet-api" % "2.5-20081211" % "provided"
