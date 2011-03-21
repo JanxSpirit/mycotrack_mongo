@@ -10,23 +10,28 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
   // this line
   // override def scanDirectories = Nil
 
-    val liftwebkit = "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default"
-    val liftmongodb = "net.liftweb" %% "lift-mongodb" % liftVersion % "compile->default"
-    val liftmongodbrecord = "net.liftweb" %% "lift-mongodb-record" % liftVersion % "compile->default"
-    val liftwidgets = "net.liftweb" %% "lift-widgets" % liftVersion % "compile->default"
-    val liftwizard = "net.liftweb" %% "lift-wizard" % liftVersion % "compile->default"
-    val logback = "ch.qos.logback" % "logback-classic" % "0.9.28" % "compile->default"
-    //casbah
-    val casbah = "com.mongodb.casbah" %% "casbah" % "2.0.1"
+  val liftwebkit = "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default"
+  val liftmongodb = "net.liftweb" %% "lift-mongodb" % liftVersion % "compile->default"
+  val liftmongodbrecord = "net.liftweb" %% "lift-mongodb-record" % liftVersion % "compile->default"
+  val liftwidgets = "net.liftweb" %% "lift-widgets" % liftVersion % "compile->default"
+  val liftwizard = "net.liftweb" %% "lift-wizard" % liftVersion % "compile->default"
+  val logback = "ch.qos.logback" % "logback-classic" % "0.9.28" % "compile->default"
+
+  //casbah
+  val casbah = "com.mongodb.casbah" %% "casbah" % "2.0.3"
 
   //rogue mongo DSL
-  val rogue = "com.foursquare" %% "rogue" % "1.0.2" % "compile->default"
+  //val rogue = "com.foursquare" % "rogue_2.8.0" % "1.0.3" % "compile->default"
 
-    // jetty
-    val jetty6 = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test"
-    val servletApi = "org.mortbay.jetty" % "servlet-api" % "2.5-20081211" % "provided"
+  //configgy
+  val TwitterRepo = MavenRepository("Twitter Repository", "http://maven.twttr.com")
+  val configgyConfig = ModuleConfiguration("net.lag", "configgy", "2.0.2", TwitterRepo)
 
-    //lazy val jetty = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test->default"
-    //"junit" % "junit" % "4.5" % "test->default",
-    //"org.scala-tools.testing" %% "specs" % "1.6.7.2" % "test->default",
+  // jetty
+  val jetty6 = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test"
+  val servletApi = "org.mortbay.jetty" % "servlet-api" % "2.5-20081211" % "provided"
+
+  //lazy val jetty = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test->default"
+  //"junit" % "junit" % "4.5" % "test->default",
+  //"org.scala-tools.testing" %% "specs" % "1.6.7.2" % "test->default",
 }
