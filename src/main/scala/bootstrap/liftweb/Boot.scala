@@ -31,6 +31,7 @@ class Boot {
 object MenuInfo {
   import Loc._
   val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
+  //val IfSuperUser = If(() => User.currentUser.get.superUser == true, "You must be a superuser")
 
   def menu: List[Menu] =
     List[Menu](Menu(Loc("Home", List("index"), "Home")),
@@ -40,7 +41,8 @@ object MenuInfo {
       Menu(Loc("newProject", List("create"), "New Project", IfLoggedIn)),
       Menu(Loc("createEvent", List("createEvent"), "Create Event", Hidden)),
       Menu(Loc("createNote", List("createNote"), "Create Note", Hidden)),
-      Menu(Loc("events", List("events"), "Add Events", Hidden))) :::
+      Menu(Loc("events", List("events"), "Add Events", Hidden)),
+      Menu(Loc("manageSpecies", List("manageSpecies"), "Add Species", IfLoggedIn))) :::
             User.sitemap :::
     List[Menu](Menu("Help") / "help" / "index")
 
