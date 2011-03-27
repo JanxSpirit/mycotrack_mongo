@@ -20,12 +20,16 @@ class Culture extends MongoRecord[Culture] with MongoId[Culture] {
     override def displayName = "Substrate"
   }
 
+  object cultureType extends StringField(this, 100) {
+    override def displayName = "Culture Type"
+  }
+
   object userId extends ObjectIdField(this) {
     def obj = User.find(value)
   }
 
-  object speciesId extends ObjectIdField(this) {
-    def obj = Species.find(value)
+  object species extends StringField(this,100){
+    override def displayName = "Species"
   }
 
 }

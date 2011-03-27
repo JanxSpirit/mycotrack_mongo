@@ -17,6 +17,9 @@ class CreateProject {
   def create(in: NodeSeq): NodeSeq =
     Helpers.bind("p", in, "form" -> "This is gonna be a form: ")
 
+  //When you want to use QR codes try the google API like:
+  //https://chart.googleapis.com/chart?cht=qr&chs=250x250&ch1=http://www.mycotrack.com
+
   def add(xhtml: NodeSeq): NodeSeq = {
     val proj = Project.createRecord
     var name = proj.name.is

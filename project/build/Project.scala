@@ -20,7 +20,7 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
     val casbah = "com.mongodb.casbah" %% "casbah" % "2.0.1"
 
   //rogue mongo DSL
-  val rogue = "com.foursquare" %% "rogue" % "1.0.2" % "compile->default"
+  //val rogue = "com.foursquare" %% "rogue" % "1.0.2" % "compile->default"
 
     // jetty
     val jetty6 = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test"

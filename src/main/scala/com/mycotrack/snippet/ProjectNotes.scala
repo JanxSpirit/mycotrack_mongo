@@ -53,7 +53,7 @@ class ProjectNotes extends Logger {
 
   def add(xhtml: NodeSeq): NodeSeq = {
     val project = SelectedProject.is.open_!
-    var notes: List[Note] = project.notes.is
+    val notes: List[Note] = project.notes.is
     var name: String = ""
     var body: String = ""
 

@@ -4,8 +4,12 @@ import xml.{Text, NodeSeq}
 import net.liftweb.http.{RequestVar, S, TemplateFinder, SHtml}
 import net.liftweb.util.{Helpers, Log}
 import Helpers._
-import net.liftweb.common.{Full, Empty, Box}
 import com.mycotrack.model.{Species, Culture, Project, User}
+import net.liftweb.common._
+import com.mongodb._
+import com.mongodb.casbah.Imports._
+import net.liftweb.json.JsonDSL._
+import net.liftweb.record.field._
 
 /**
  * @author chris_carrier
@@ -13,37 +17,41 @@ import com.mycotrack.model.{Species, Culture, Project, User}
  */
 
 
-class Library {
+class Library extends Logger {
 
- /* def list(node: NodeSeq): NodeSeq = {
-    User.currentUser.get.cultures match {
-            //case Nil => Text("")
-            case cultures => cultures.flatMap(c => bind("culture", node, "type" -> {c.cultureType.obj.open_!.name},
-                                                                "cultureType" -> {c.cultureType.obj.open_!.name},
-                                                                "species" -> {c.species.obj.open_!.commonName},
+  def list(node: NodeSeq): NodeSeq = {
+    Culture.findAll("userId" -> User.currentUser.open_!.id.toString) match {
+            case Nil => Text("No cultures.")
+            case cultures => cultures.flatMap(c => bind("culture", node,
+                                                                "cultureType" -> {c.cultureType},
+                                                                "species" -> {c.species},
                                                                 "createdDate" -> {c.createdDate},
                                                                 "remove" -> getRemoveLink(c)))
         }
-  }*/
+  }
 
   def addLink(node: NodeSeq): NodeSeq = {
     SHtml.link("createCulture", () => {}, Text("New Culture"))
   }
 
   def add(xhtml: NodeSeq): NodeSeq = {
-    val culture = new Culture
-//    var cultureType = culture.cultureType.obj
+    val culture = Culture.createRecord
+    val user = User.currentUser.open_!
+    //var cultureType = culture.cultureType.obj
 //    var species = culture.species.obj
     var createdDate = culture.createdDate
 
     Helpers.bind("culture", xhtml,
-//      "species" -> SHtml.selectObj[Species](Species.findAll.map(s => (s, s.commonName.is)), Empty, culture.species(_)),
-//      "cultureType" -> SHtml.selectObj[CultureType](CultureType.findAll.map(ct => (ct, ct.name.is)), Empty, culture.cultureType(_)),
-//      "createdDate" -> createdDate._toForm,
+      //"species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
+      "cultureType" -> SHtml.text("", culture.cultureType(_)),
+      "createdDate" -> createdDate.toForm,
       "submit" -> SHtml.submit("Add", () => {
-//        var userCultures = User.currentUser.get.cultures;
-//        userCultures += culture;
-//        User.currentUser.get.cultures.save
+        culture.userId(user.id)
+        culture.save
+        val userCultures: List[ObjectId] = user.cultureList.value
+        info("CULTURE ID: " + culture)
+        user.cultureList.set(culture.id :: userCultures)
+        user.save
         S.redirectTo("/library");
       }))
 
