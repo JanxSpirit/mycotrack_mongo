@@ -2,13 +2,25 @@
     <h2>Add Species</h2>
 
     <p>
-        <lift:manageSpecies.add form="POST" >
-            Scientific Name: <species:scientificName /><br />
-            Common Name: <species:commonName /><br />
-            Info URL: <species:infoUrl/> <br />
-            <species:submit />
+        <lift:manageSpecies.add form="POST">
+            Scientific Name:
+            <species:scientificName/>
+            <br/>
+            Common Name:
+            <species:commonName/>
+            <br/>
+            Info URL:
+            <species:infoUrl/>
+            <br/>
+            <species:submit/>
         </lift:manageSpecies.add>
-        <br />
+        <br/>
+
+        <lift:manageSpecies.list>
+            <ul>
+                <species:allSpecies/>
+            </ul>
+        </lift:manageSpecies.list>
     </p>
 
 </lift:surround>
