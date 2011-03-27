@@ -12,7 +12,8 @@ package com.mycotrack.db;
 
 object MycoMongoDb {
   	def setup {
-	    MongoDB.defineDb(DefaultMongoIdentifier, MongoAddress(MongoHost("localhost", 27017), "mycotrack"))
+      Props.requireOrDie("mongodb_host", "mongodb_port", "mongodb_db_name")
+	    MongoDB.defineDb(DefaultMongoIdentifier, MongoAddress(MongoHost(Props.get("mongodb_host").get, Props.get("mongodb_port").get.toInt), Props.get("mongodb_db_name").get))
 	}
 
 	def isMongoRunning: Boolean = {

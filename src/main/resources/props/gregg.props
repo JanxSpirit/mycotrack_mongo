@@ -1,1 +1,3 @@
 mongodb_host=anduin
+mongodb_port=27017
+mongodb_db_name=mycotrack
