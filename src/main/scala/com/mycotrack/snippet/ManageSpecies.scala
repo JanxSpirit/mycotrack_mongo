@@ -34,7 +34,7 @@ class ManageSpecies {
       "scientificName" -> SHtml.text(scientificName, scientificName = _),
       "commonName" -> SHtml.text(commonName, commonName = _),
       "infoUrl" -> SHtml.text(infoUrl, infoUrl = _),
-      "submit" -> SHtml.submit("Add", () => {
+      "submit" -> SHtml.submit("Save", () => {
         species.scientificName.set(scientificName)
         species.commonName.set(commonName)
         species.infoUrl.set(infoUrl)
