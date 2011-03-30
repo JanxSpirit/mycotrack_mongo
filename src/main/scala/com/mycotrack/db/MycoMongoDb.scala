@@ -35,4 +35,5 @@ object MycoMongoDb {
       case e => false
     }
   }
+
 }

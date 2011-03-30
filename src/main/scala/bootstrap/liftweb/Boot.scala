@@ -29,6 +29,7 @@ class Boot {
     //REST API
     LiftRules.dispatch.append(com.mycotrack.api.MycotrackApi) // stateful — associated with a servlet container session
     LiftRules.statelessDispatchTable.append(com.mycotrack.api.MycotrackApi) // stateless — no session created
+
   }
 }
 

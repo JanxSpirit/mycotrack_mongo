@@ -95,5 +95,4 @@ class ManageSpecies {
   private object theUpload extends RequestVar[Box[FileParamHolder]](Empty)
 
   private object theSpecies extends RequestVar[Box[Species]](Empty)
-
 }

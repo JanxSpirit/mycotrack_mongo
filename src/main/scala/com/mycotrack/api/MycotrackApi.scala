@@ -31,7 +31,7 @@ object MycotrackApi extends RestHelper {
           ("Content-Type", "image/jpeg")
         }
         InMemoryResponse(bytes, headers, Nil, 200)
-        //streaming seems preferrable but didn't immediately work
+        //streaming seems preferable but didn't immediately work
         //StreamingResponse(photo.inputStream, () => Unit, photo.size, headers, Nil, 200)
       }
     }
