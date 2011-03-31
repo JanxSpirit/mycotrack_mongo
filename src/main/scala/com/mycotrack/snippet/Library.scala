@@ -25,7 +25,7 @@ class Library extends Logger {
             case cultures => cultures.flatMap(c => bind("culture", node,
                                                                 "cultureType" -> {c.cultureType},
                                                                 "species" -> {c.species},
-                                                                "createdDate" -> {c.createdDate},
+                                                                "createdDate" -> {c.createdDate.toString},
                                                                 "remove" -> getRemoveLink(c)))
         }
   }
@@ -37,25 +37,20 @@ class Library extends Logger {
   def add(xhtml: NodeSeq): NodeSeq = {
     val culture = Culture.createRecord
     val user = User.currentUser.open_!
-    //var cultureType = culture.cultureType.obj
-//    var species = culture.species.obj
     var createdDate = culture.createdDate
 
     Helpers.bind("culture", xhtml,
-      //"species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
+      "species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, culture.species(_)),
       "cultureType" -> SHtml.text("", culture.cultureType(_)),
       "createdDate" -> createdDate.toForm,
       "submit" -> SHtml.submit("Add", () => {
         culture.userId(user.id)
         culture.save
         val userCultures: List[ObjectId] = user.cultureList.value
-        info("CULTURE ID: " + culture)
         user.cultureList.set(culture.id :: userCultures)
         user.save
         S.redirectTo("/library");
       }))
-
-    //proj.toForm(Full("save"), {_.save})
   }
 
   private def getEditLink(culture: Culture): NodeSeq = {
