@@ -25,11 +25,18 @@ class Boot {
 
     //Set up MongoDB
     MycoMongoDb.setup
+
+    //REST API
+    LiftRules.dispatch.append(com.mycotrack.api.MycotrackApi) // stateful — associated with a servlet container session
+    LiftRules.statelessDispatchTable.append(com.mycotrack.api.MycotrackApi) // stateless — no session created
+
   }
 }
 
 object MenuInfo {
+
   import Loc._
+
   val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
   //val IfSuperUser = If(() => User.currentUser.get.superUser == true, "You must be a superuser")
 
@@ -43,7 +50,7 @@ object MenuInfo {
       Menu(Loc("createNote", List("createNote"), "Create Note", Hidden)),
       Menu(Loc("events", List("events"), "Add Events", Hidden)),
       Menu(Loc("manageSpecies", List("manageSpecies"), "Add Species", IfLoggedIn))) :::
-            User.sitemap :::
-    List[Menu](Menu("Help") / "help" / "index")
+      User.sitemap :::
+      List[Menu](Menu("Help") / "help" / "index")
 
 }
