@@ -1,8 +1,11 @@
 package com.mycotrack.lib
 
 import http.HttpConnection
-import net.liftweb.common.{Full, Box, Empty}
 import dispatch._
+import com.mycotrack.db.MycoMongoDb
+import org.bson.types.ObjectId
+import net.liftweb.common.{Logger, Full, Box, Empty}
+
 
 /**
  * @author chris_carrier
@@ -10,7 +13,7 @@ import dispatch._
  */
 
 
-trait ChartGenerator extends HttpConnection {
+trait ChartGenerator extends HttpConnection with Logger {
 
   val DEFAULT_WIDTH = 250
   val DEFAULT_HEIGHT = 250
@@ -18,7 +21,7 @@ trait ChartGenerator extends HttpConnection {
   val CHART_TYPE = "qr"
 
 
-  def createQRCode(ch1: String, height: Box[Int], width: Box[Int]) {
+  def createQRCode(ch1: String, height: Box[Int], width: Box[Int], id: ObjectId) {
     var actualWidth = DEFAULT_WIDTH
     var actualHeight = DEFAULT_HEIGHT
 
@@ -28,7 +31,16 @@ trait ChartGenerator extends HttpConnection {
     }
 
     val dimensions = actualWidth + "x" + actualHeight
-    val rquery = req <<? Map("cht" -> CHART_TYPE, "chs" -> dimensions, "ch1" -> "http://www.mycotrack.com") >>> System.out
+    val rquery = req <<? Map("cht" -> CHART_TYPE, "chs" -> dimensions, "ch1" -> ch1)
+    info("Calling: " + rquery.to_uri)
+    http(rquery >> {stream =>
+      info("Calling inside: " + stream)
+      MycoMongoDb.gridFs(stream) {
+          fh =>
+            fh.metaData.put("mapped_id", id)
+            fh.filename = id.toString
+        }
+    })
 
   }
 
