@@ -19,16 +19,8 @@ import com.mongodb.casbah.Imports._
 
 class ManageSpecies {
 
-  val speciesb = for {
-    id <- S.param("id")
-    s <- Species.find(new ObjectId(id))
-  } yield s
-
-  val species = speciesb.getOrElse(Species.createRecord)
-  theSpecies(Full(species))
-
   def add(xhtml: NodeSeq): NodeSeq = {
-    //val species = Species.createRecord
+    val species = Species.createRecord
 
     var scientificName = species.scientificName.is
     var commonName = species.commonName.is
@@ -48,17 +40,32 @@ class ManageSpecies {
 
   }
 
+  def info(xhtml: NodeSeq): NodeSeq = {
+    val species = theSpecies.get.open_!
+
+    var scientificName = species.scientificName.is
+    var commonName = species.commonName.is
+    var infoUrl = species.infoUrl.is
+
+    Helpers.bind("species", xhtml,
+      "scientificName" -> scientificName,
+      "commonName" -> commonName,
+      "infoUrl" -> infoUrl
+    )
+  }
+
   def list(xhtml: NodeSeq): NodeSeq = {
     Helpers.bind("species", xhtml,
       "allSpecies" -> {
         for (species <- Species.findAll) yield <li>
-          {SHtml.link("/manageSpecies?id=" + species._id.toString, () => Unit, Text(species.commonName.get))}
+          <a href={"speciesInfo/" + species.id.toString}>{species.commonName.get}</a>
         </li>
       }
     )
   }
 
-  def imageUpload(xhtml: Group): NodeSeq =
+  def imageUpload(xhtml: Group): NodeSeq = {
+    val species = theSpecies.get.open_!
     if (S.get_?) bind("ul", chooseTemplate("choose", "get", xhtml),
       "file_upload" -> fileUpload(ul => {
         theUpload(Full(ul))
@@ -76,8 +83,10 @@ class ManageSpecies {
       "length" -> theUpload.is.map(v => Text(v.file.length.toString)),
       "md5" -> theUpload.is.map(v => Text(hexEncode(md5(v.file))))
     );
+  }
 
   def speciesImage(xhtml: NodeSeq): NodeSeq = {
+    val species = theSpecies.get.open_!
     Helpers.bind("species", xhtml,
       "image" -> {
         val photo = MycoMongoDb.gridFs.findOne(MongoDBObject("species_id" -> species.id))
@@ -93,6 +102,6 @@ class ManageSpecies {
   }
 
   private object theUpload extends RequestVar[Box[FileParamHolder]](Empty)
-
-  private object theSpecies extends RequestVar[Box[Species]](Empty)
 }
+
+object theSpecies extends RequestVar[Box[Species]](Empty)

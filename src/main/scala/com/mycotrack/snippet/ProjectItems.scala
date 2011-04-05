@@ -112,7 +112,7 @@ class ProjectItems extends Logger {
   }
 
   private def getEditLink(project: Project): NodeSeq = {
-    SHtml.link("events", () => {SelectedProject(Full(project)); info("SelectProject is: " + SelectedProject.is.open_!);}, Text(project.name.is))
+    <a href={"projects/" + project.id.toString}>{project.name.is}</a>
   }
 
   private def getAddEventLink(project: Project): NodeSeq = {

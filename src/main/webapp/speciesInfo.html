@@ -1,0 +1,22 @@
+<lift:surround with="default" at="content">
+    <h2>Add Species</h2>
+
+    <p>
+        <lift:manageSpecies.info>
+            Scientific Name:
+            <species:scientificName/>
+            <br/>
+            Common Name:
+            <species:commonName/>
+            <br/>
+            Info URL:
+            <species:infoUrl/>
+        </lift:manageSpecies.info>
+        <br/>
+
+        <lift:manageSpecies.speciesImage>
+            <species:image/>
+        </lift:manageSpecies.speciesImage>
+    </p>
+
+</lift:surround>

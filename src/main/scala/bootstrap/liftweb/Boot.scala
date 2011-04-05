@@ -2,12 +2,13 @@ package bootstrap.liftweb
 
 import _root_.net.liftweb.http._
 import _root_.net.liftweb.sitemap._
-import java.sql.{Connection, DriverManager}
-import net.liftweb.mapper._
 import _root_.net.liftweb.widgets.menu.MenuWidget
-import net.liftweb.common.{Logger, Empty, Full, Box}
+import net.liftweb.common.Full
 import com.mycotrack.model._
 import com.mycotrack.db._
+import net.liftweb.util.Helpers._
+import com.mycotrack.snippet.SelectedProject
+import com.mycotrack.snippet._
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -23,8 +24,31 @@ class Boot {
 
     MenuWidget init
 
-    //Set up MongoDB
-    MycoMongoDb.setup
+      //Set up MongoDB
+      MycoMongoDb.setup
+
+    LiftRules.statelessRewrite.append {
+      case RewriteRequest(
+      ParsePath("projects" :: id :: Nil, "", true, false), _, _) => {
+        val project = Project.find(id)
+        SelectedProject(project)
+        RewriteResponse("events" :: Nil)
+      }
+    }.append {
+      case RewriteRequest(
+      ParsePath("manageSpecies" :: Nil, "", true, false), _, _) => {
+        val species = Species.createRecord
+        theSpecies(Full(species))
+        RewriteResponse(ParsePath("manageSpecies" :: Nil, "", true, false), Map.empty, true)
+      }
+    }.append {
+      case RewriteRequest(
+      ParsePath("speciesInfo" :: id :: Nil, "", true, false), _, _) => {
+        val species = Species.find(id)
+        theSpecies(species)
+        RewriteResponse(ParsePath("speciesInfo" :: Nil, "", true, false), Map.empty, true)
+      }
+    }
 
     //REST API
     LiftRules.dispatch.append(com.mycotrack.api.MycotrackApi) // stateful — associated with a servlet container session
@@ -45,10 +69,11 @@ object MenuInfo {
       Menu(Loc("manage", List("manage"), "Manage Project", IfLoggedIn)),
       Menu(Loc("library", List("library"), "Culture Library", IfLoggedIn)),
       Menu(Loc("createCulture", List("createCulture"), "New Culture", Hidden)),
-      Menu(Loc("newProject", List("create"), "New Project", IfLoggedIn)),
+      Menu(Loc("newProject", List("create"), "New Project", Hidden)),
       Menu(Loc("createEvent", List("createEvent"), "Create Event", Hidden)),
       Menu(Loc("createNote", List("createNote"), "Create Note", Hidden)),
       Menu(Loc("events", List("events"), "Add Events", Hidden)),
+      Menu(Loc("speciesInfo", List("speciesInfo"), "Species Info", Hidden)),
       Menu(Loc("manageSpecies", List("manageSpecies"), "Add Species", IfLoggedIn))) :::
       User.sitemap :::
       List[Menu](Menu("Help") / "help" / "index")
