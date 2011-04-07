@@ -1,7 +1,7 @@
 package com.mycotrack.snippet
 
 import xml.{Text, NodeSeq}
-import com.mycotrack.model.{Project, Species}
+import com.mycotrack.model.{Project, Species, User}
 import net.liftweb.http.{RequestVar, S, TemplateFinder, SHtml}
 import net.liftweb.util.{Helpers, Log}
 import Helpers._
@@ -52,13 +52,13 @@ class ProjectItems extends Logger {
 
       var name = project.name.is
       var species = project.species.is
+      var substrate = project.substrate.is
 
       val template = TemplateFinder.findAnyTemplate(ITEM_TEMPLATE :: Nil).openOr(<p></p>)
       val content = bind("projectForm", template, "title" -> Text("Edit item"),
         "name" -> SHtml.text(name, name = _),
-        "species" -> SHtml.hidden(() => {
-          species = species
-        }),
+        "species" -> SHtml.hidden(() => {species = species}),
+        "substrate" -> SHtml.hidden(() => {substrate = substrate}),
         "submit" -> SHtml.submit("save", () => saveItem(id, name)),
         "close" -> SHtml.link("index", () => clear, Text("close")))
 
@@ -70,10 +70,13 @@ class ProjectItems extends Logger {
   }
 
   def list(node: NodeSeq): NodeSeq = {
-    Project.findAll match {
+    val currentUser = User.currentUser.open_!
+
+    Project.findAll("userId" -> currentUser.id.toString) match {
       case Nil => Text("There is no items in database")
       case projects => projects.flatMap(i => bind("project", node, "name" -> getEditLink(i),
         "species" -> speciesLink(i.species.is),
+        "substrate" -> speciesLink(i.substrate.is),
 //        "createdDate" -> {
 //          i.createdDate
 //        },

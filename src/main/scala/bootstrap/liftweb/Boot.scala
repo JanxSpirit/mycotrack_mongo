@@ -24,6 +24,9 @@ class Boot {
 
     MenuWidget init
 
+      LiftRules.ajaxStart = Full(() => LiftRules.jsArtifacts.show("loading").cmd)
+      LiftRules.ajaxEnd = Full(() => LiftRules.jsArtifacts.hide("loading").cmd)
+
       //Set up MongoDB
       MycoMongoDb.setup
 

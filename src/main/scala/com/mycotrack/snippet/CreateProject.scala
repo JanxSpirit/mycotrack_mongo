@@ -7,6 +7,7 @@ import Helpers._
 import net.liftweb.common.{Empty, Full}
 import com.mycotrack.model.{Species, Project, User}
 import com.mycotrack.lib.ChartGenerator
+import java.util.Date
 
 /**
  * @author chris_carrier
@@ -27,12 +28,13 @@ class CreateProject extends ChartGenerator {
 
     Helpers.bind("entry", xhtml,
       "species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
-      "name" -> SHtml.text(name, name = _),
+      "substratePreparation" -> SHtml.select(List("none" -> "none", "pasteurized" -> "p", "sterilized" -> "s"), Full("none"), proj.preparation(_)),
+      "substrate" -> SHtml.text("", proj.substrate(_)),
+      "name" -> SHtml.text("", proj.name(_)),
       "createdDate" -> createdDate.toForm,
       "submit" -> SHtml.submit("Add", () => {
-        proj.name.set(name)
         proj.userId.set(tempUser.id)
-        proj.createdDate.set(createdDate.get)
+        //proj.createdDate(new Date)
         println(proj)
         proj.save;
         createQRCode("www.google.com", Empty, Empty, proj.id)
