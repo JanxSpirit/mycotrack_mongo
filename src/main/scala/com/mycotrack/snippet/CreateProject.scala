@@ -28,7 +28,8 @@ class CreateProject extends ChartGenerator {
 
     Helpers.bind("entry", xhtml,
       "species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
-      "substratePreparation" -> SHtml.select(List("none" -> "none", "pasteurized" -> "p", "sterilized" -> "s"), Full("none"), proj.preparation(_)),
+      "substratePreparation" -> SHtml.select(List("none" -> "none", "pasteurized" -> "pasteurized", "sterilized" -> "sterilized"), Full("none"), proj.preparation(_)),
+      "container" -> SHtml.select(List("none" -> "none", "Jar - quart" -> "Jar - quart", "Jar - pint" -> "Jar - pint", "Bag - filter" -> "Bag - filter"), Full("none"), proj.container(_)),
       "substrate" -> SHtml.text("", proj.substrate(_)),
       "name" -> SHtml.text("", proj.name(_)),
       "createdDate" -> createdDate.toForm,

@@ -72,11 +72,13 @@ class ProjectItems extends Logger {
   def list(node: NodeSeq): NodeSeq = {
     val currentUser = User.currentUser.open_!
 
+    val projects = Project.findAll("userId" -> currentUser.id.toString)
+
     Project.findAll("userId" -> currentUser.id.toString) match {
       case Nil => Text("There is no items in database")
       case projects => projects.flatMap(i => bind("project", node, "name" -> getEditLink(i),
         "species" -> speciesLink(i.species.is),
-        "substrate" -> speciesLink(i.substrate.is),
+        "substrate" -> i.substrate.is,
 //        "createdDate" -> {
 //          i.createdDate
 //        },
@@ -89,7 +91,7 @@ class ProjectItems extends Logger {
   }
 
   def speciesLink(commonName: String): NodeSeq = {
-    val species = Species.find("commonName" -> "shiitake").open_!
+    val species = Species.find("commonName" -> commonName).open_!
     val url = "http://" + species.infoUrl.is
     info("Got species link: " + url)
 

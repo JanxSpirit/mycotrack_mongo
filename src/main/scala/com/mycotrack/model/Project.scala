@@ -25,12 +25,20 @@ class Project extends MongoRecord[Project] with MongoId[Project] {
     override def displayName = "Substrate"
   }
 
+  object container extends StringField(this,100){
+    override def displayName = "Container"
+  }
+
   object preparation extends StringField(this,100){
     override def displayName = "Preparation"
   }
 
   object userId extends ObjectIdField(this) {
     def obj = User.find(value)
+  }
+
+  object parentProject extends ObjectIdField(this) {
+    def obj = Project.find(value)
   }
 
   object notes extends MongoJsonObjectListField[Project, Note](this, Note)

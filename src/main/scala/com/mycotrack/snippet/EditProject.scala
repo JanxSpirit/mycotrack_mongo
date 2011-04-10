@@ -26,9 +26,6 @@ class EditProject extends Logger {
     var createdDate = proj.createdDate.is
     
     val speciesList = Species.findAll
-    
-
-    info("Found species from Mongo:" + speciesList);
 
     Helpers.bind("entry", xhtml,
       "species" -> SHtml.select(speciesList.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
@@ -42,5 +39,11 @@ class EditProject extends Logger {
       }))
 
     //proj.toForm(Full("save"), {_.save})
+  }
+
+  def splitLink(xhtml: NodeSeq): NodeSeq = {
+    val project = SelectedProject.is.open_!
+    val url = "/splitProject/" + project.id.toString
+    <span><a href={url}>Split project</a></span>
   }
 }
