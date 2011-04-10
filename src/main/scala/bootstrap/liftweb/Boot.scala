@@ -6,6 +6,7 @@ import _root_.net.liftweb.widgets.menu.MenuWidget
 import net.liftweb.common.Full
 import com.mycotrack.model._
 import com.mycotrack.db._
+import com.mycotrack.lift.MycotrackUrlRewriter
 import net.liftweb.util.Helpers._
 import com.mycotrack.snippet.SelectedProject
 import com.mycotrack.snippet._
@@ -14,7 +15,7 @@ import com.mycotrack.snippet._
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
  */
-class Boot {
+class Boot extends MycotrackUrlRewriter {
   def boot {
     // where to search snippet
     LiftRules.addToPackages("com.mycotrack")
@@ -29,29 +30,6 @@ class Boot {
 
       //Set up MongoDB
       MycoMongoDb.setup
-
-    LiftRules.statelessRewrite.append {
-      case RewriteRequest(
-      ParsePath("projects" :: id :: Nil, "", true, false), _, _) => {
-        val project = Project.find(id)
-        SelectedProject(project)
-        RewriteResponse("events" :: Nil)
-      }
-    }.append {
-      case RewriteRequest(
-      ParsePath("manageSpecies" :: Nil, "", true, false), _, _) => {
-        val species = Species.createRecord
-        theSpecies(Full(species))
-        RewriteResponse(ParsePath("manageSpecies" :: Nil, "", true, false), Map.empty, true)
-      }
-    }.append {
-      case RewriteRequest(
-      ParsePath("speciesInfo" :: id :: Nil, "", true, false), _, _) => {
-        val species = Species.find(id)
-        theSpecies(species)
-        RewriteResponse(ParsePath("speciesInfo" :: Nil, "", true, false), Map.empty, true)
-      }
-    }
 
     //REST API
     LiftRules.dispatch.append(com.mycotrack.api.MycotrackApi) // stateful — associated with a servlet container session
