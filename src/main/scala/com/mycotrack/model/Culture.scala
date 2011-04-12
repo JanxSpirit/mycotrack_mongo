@@ -12,6 +12,10 @@ class Culture extends MongoRecord[Culture] with MongoId[Culture] {
     override def displayName = "Name"
   }
 
+  object key extends StringField(this, 100) {
+    override def displayName = "Key"
+  }
+
   object createdDate extends DateTimeField(this) {
     override def displayName = "Date Started"
   }
@@ -28,8 +32,8 @@ class Culture extends MongoRecord[Culture] with MongoId[Culture] {
     def obj = User.find(value)
   }
 
-  object species extends StringField(this,100){
-    override def displayName = "Species"
+  object species extends ObjectIdField(this){
+    def obj = Species.find(value)
   }
 
 }

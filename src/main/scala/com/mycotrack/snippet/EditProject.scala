@@ -4,11 +4,14 @@ import _root_.scala.xml.NodeSeq
 import _root_.net.liftweb.util.Helpers
 import net.liftweb.http.{S, SHtml}
 import Helpers._
-import com.mycotrack.model.{Species, Project}
+import com.mycotrack.model.{Species, Project, Culture, User}
 import net.liftweb.common.{Logger, Full, Empty}
 import net.liftweb.mongodb.{JsonObject, JsonObjectMeta}
 import com.mongodb._
 import com.mongodb.casbah.Imports._
+import com.mongodb.casbah.Implicits._
+import net.liftweb.json.JsonDSL._
+
 
 /**
  * @author chris_carrier
@@ -24,16 +27,17 @@ class EditProject extends Logger {
     var notes = proj.notes
     //var species: Species = proj.species.obj.open_!
     var createdDate = proj.createdDate.is
+    var culture = proj.culture
+    val tempUser = User.currentUser.open_!
     
     val speciesList = Species.findAll
 
     Helpers.bind("entry", xhtml,
-      "species" -> SHtml.select(speciesList.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
+      "culture" -> SHtml.select(Culture.findAll("userId" -> tempUser.id.toString).map(xs => xs.key.is -> xs.id.toString), Empty, culture.setFromString(_)),
       "name" -> SHtml.text(name, name = _),
       //"createdDate" -> createdDate.toForm,
       "submit" -> SHtml.submit("Submit", () => {
         proj.name(name);
-        //proj.species(species);
         proj.save;
         S.redirectTo("/manage", () => SelectedProject(Full(proj)));
       }))

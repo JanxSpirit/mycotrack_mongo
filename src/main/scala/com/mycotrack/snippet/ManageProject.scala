@@ -39,6 +39,7 @@ class ManageProject extends ChartGenerator {
 
   def splitProject(xhtml: NodeSeq): NodeSeq = {
     val project = SelectedProject.is.open_!
+    val tempUser = User.currentUser.open_!
 
     val newProject = Project.createRecord
     val createdDate = newProject.createdDate
@@ -50,7 +51,6 @@ class ManageProject extends ChartGenerator {
       "createdDate" -> createdDate.toForm,
       "submit" -> SHtml.submit("Create", () => {
         newProject.userId.set(project.userId.is)
-        newProject.species(project.species.is)
         newProject.parentProject(project.id)
         //proj.createdDate(new Date)
         newProject.save;

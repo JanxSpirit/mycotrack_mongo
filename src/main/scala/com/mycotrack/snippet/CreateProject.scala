@@ -5,9 +5,11 @@ import _root_.net.liftweb.util.Helpers
 import net.liftweb.http.{S, SHtml}
 import Helpers._
 import net.liftweb.common.{Empty, Full}
-import com.mycotrack.model.{Species, Project, User}
+import com.mycotrack.model.{Species, Project, User, Culture}
 import com.mycotrack.lib.ChartGenerator
 import java.util.Date
+import net.liftweb.json.JsonDSL._
+
 
 /**
  * @author chris_carrier
@@ -25,11 +27,14 @@ class CreateProject extends ChartGenerator {
 
     val tempUser = User.currentUser.open_!
     var createdDate = proj.createdDate
+    var culture = proj.culture
 
     Helpers.bind("entry", xhtml,
-      "species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, proj.species(_)),
+      "culture" -> SHtml.select(Culture.findAll("userId" -> tempUser.id.toString).map(xs => xs.key.is -> xs.id.toString), Empty, culture.setFromString(_)),
       "substratePreparation" -> SHtml.select(List("none" -> "none", "pasteurized" -> "pasteurized", "sterilized" -> "sterilized"), Full("none"), proj.preparation(_)),
       "container" -> SHtml.select(List("none" -> "none", "Jar - quart" -> "Jar - quart", "Jar - pint" -> "Jar - pint", "Bag - filter" -> "Bag - filter"), Full("none"), proj.container(_)),
+      "randomKey" -> SHtml.checkbox(false, proj.randomKey(_)),
+      "key" -> SHtml.text("", proj.key(_)),
       "substrate" -> SHtml.text("", proj.substrate(_)),
       "name" -> SHtml.text("", proj.name(_)),
       "createdDate" -> createdDate.toForm,
