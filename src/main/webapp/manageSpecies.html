@@ -1,4 +1,51 @@
 <lift:surround with="default" at="content">
+
+    <h2>Add Species</h2>
+
+    <p>
+        <lift:manageSpecies.add form="POST">
+            Scientific Name:
+            <species:scientificName/>
+            <br/>
+            Common Name:
+            <species:commonName/>
+            <br/>
+            Info URL:
+            <species:infoUrl/>
+            <br/>
+            <species:submit/>
+        </lift:manageSpecies.add>
+        <br/>
+    </p>
+
+    <lift:manageSpecies.list>
+        <ul>
+            <species:allSpecies/>
+        </ul>
+    </lift:manageSpecies.list>
+
+</lift:surround>
+<!--    <link type="text/css" href="/style/photo_style.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/scripts/script.js"></script>
+    <script type="text/javascript">
+        $('slideshow').style.display='none';
+        $('wrapper').style.display='block';
+        var slideshow=new TINY.slideshow("slideshow");
+        window.onload=function(){
+        slideshow.auto=true;
+        slideshow.speed=5;
+        slideshow.link="linkhover";
+        slideshow.info="information";
+        slideshow.thumbs="slider";
+        slideshow.left="slideleft";
+        slideshow.right="slideright";
+        slideshow.scrollSpeed=4;
+        slideshow.spacing=5;
+        slideshow.active="#fff";
+        slideshow.init("slideshow","image","imgprev","imgnext","imglink");
+        }
+    </script>
+
     <h2>Add Species</h2>
 
     <p>
@@ -20,43 +67,83 @@
             <species:image/>
         </lift:manageSpecies.speciesImage>
 
-        <lift:manageSpecies.imageUpload form="post" multipart="true">
-            <choose:post>
-                <p>
-                    Common name:
-                    <ul:common_name></ul:common_name>
-                    <br/>
-                    Scientific name:
-                    <ul:scientific_name></ul:scientific_name>
-                    <br/>
-                    File name:
-                    <ul:file_name></ul:file_name>
-                    <br/>
-                    MIME Type:
-                    <ul:mime_type></ul:mime_type>
-                    <br/>
-                    File length:
-                    <ul:length></ul:length>
-                    <br/>
-                    MD5 Hash:
-                    <ul:md5></ul:md5>
-                    <br/>
-                </p>
-            </choose:post>
+    <ul id="slideshow">
+        <li>
+            <h3>TinySlideshow v1</h3>
+            <span>http://anduin/photos/2010/DSCF2744.JPG</span>
 
-            <choose:get>
-                Select a file to upload:
-                <ul:file_upload></ul:file_upload>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut urna. Mauris nulla. Donec nec mauris.
+                Proin nulla dolor, bibendum et, dapibus in, euismod ut, felis.</p>
+            <a href="#"><img src="http://anduin/photos/2010/DSCF2744.JPG" width="100" /></a>
+        </li>
+        <li>
+            <h3>TinySlideshow v1</h3>
+            <span>http://anduin/photos/2010/DSCF2744.JPG</span>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut urna. Mauris nulla. Donec nec mauris.
+                Proin nulla dolor, bibendum et, dapibus in, euismod ut, felis.</p>
+            <a href="#"><img src="http://anduin/photos/2010/DSCF2744.JPG" width="100" /></a>
+        </li>
+    </ul>
+
+    <div id="wrapper">
+        <div id="fullsize">
+            <div id="imgprev" class="imgnav" title="Previous Image"></div>
+            <div id="imglink"></div>
+            <div id="imgnext" class="imgnav" title="Next Image"></div>
+            <div id="image"></div>
+            <div id="information">
+                <h3></h3>
+
+                <p></p>
+            </div>
+        </div>
+        <div id="thumbnails">
+            <div id="slideleft" title="Slide Left"></div>
+            <div id="slidearea">
+                <div id="slider"></div>
+            </div>
+            <div id="slideright" title="Slide Right"></div>
+        </div>
+    </div>
+
+    <lift:manageSpecies.imageUpload form="post" multipart="true">
+        <choose:post>
+            <p>
+                Common name:
+                <ul:common_name></ul:common_name>
                 <br/>
-                <input type="submit" value="Upload File"/>
-            </choose:get>
-        </lift:manageSpecies.imageUpload>
+                Scientific name:
+                <ul:scientific_name></ul:scientific_name>
+                <br/>
+                File name:
+                <ul:file_name></ul:file_name>
+                <br/>
+                MIME Type:
+                <ul:mime_type></ul:mime_type>
+                <br/>
+                File length:
+                <ul:length></ul:length>
+                <br/>
+                MD5 Hash:
+                <ul:md5></ul:md5>
+                <br/>
+            </p>
+        </choose:post>
 
-        <lift:manageSpecies.list>
-            <ul>
-                <species:allSpecies/>
-            </ul>
-        </lift:manageSpecies.list>
+        <choose:get>
+            Select a file to upload:
+            <ul:file_upload></ul:file_upload>
+            <br/>
+            <input type="submit" value="Upload File"/>
+        </choose:get>
+    </lift:manageSpecies.imageUpload>
+
+    <lift:manageSpecies.list>
+        <ul>
+            <species:allSpecies/>
+        </ul>
+    </lift:manageSpecies.list>
     </p>
 
-</lift:surround>
+-->
