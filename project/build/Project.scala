@@ -10,6 +10,8 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
   // this line
   // override def scanDirectories = Nil
 
+  val buzzrepo = "The Buzz Media Maven Repository" at "http://maven.thebuzzmedia.com"
+
   val liftwebkit = "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default"
   val liftmongodb = "net.liftweb" %% "lift-mongodb" % liftVersion % "compile->default"
   val liftmongodbrecord = "net.liftweb" %% "lift-mongodb-record" % liftVersion % "compile->default"
@@ -29,6 +31,9 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
 
   //dispatch
   val dispatch = "net.databinder" %% "dispatch-http" % "0.7.8"
+
+  //imgscalr
+  val imgscalr = "com.thebuzzmedia" % "imgscalr-lib" % "3.1"
 
   //lazy val jetty = "org.mortbay.jetty" % "jetty" % "6.1.22" % "test->default"
   //"junit" % "junit" % "4.5" % "test->default",

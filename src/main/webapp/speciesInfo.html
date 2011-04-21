@@ -13,10 +13,88 @@
             <species:infoUrl/>
         </lift:manageSpecies.info>
         <br/>
-
-        <lift:manageSpecies.speciesImage>
+     </p>
+   <!--     <lift:manageSpecies.speciesImage>
             <species:image/>
         </lift:manageSpecies.speciesImage>
-    </p>
+   -->
+     <ul id="slideshow">
+        <lift:manageSpecies.speciesImages>
+            <species:image/>
+        </lift:manageSpecies.speciesImages>
+    </ul>
+    <div id="wrapper">
+        <div id="fullsize">
+            <div id="imgprev" class="imgnav" title="Previous Image"></div>
+            <div id="imglink"></div>
+
+            <div id="imgnext" class="imgnav" title="Next Image"></div>
+            <div id="image"></div>
+            <div id="information">
+                <h3></h3>
+
+                <p></p>
+            </div>
+        </div>
+        <div id="thumbnails">
+            <div id="slideleft" title="Slide Left"></div>
+
+            <div id="slidearea">
+                <div id="slider"></div>
+            </div>
+            <div id="slideright" title="Slide Right"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/scripts/compressed.js"></script>
+    <script type="text/javascript">
+        $('slideshow').style.display='none';
+        $('wrapper').style.display='block';
+        var slideshow=new TINY.slideshow("slideshow");
+        window.onload=function(){
+        slideshow.auto=true;
+        slideshow.speed=5;
+        slideshow.link="linkhover";
+        slideshow.info="information";
+        slideshow.thumbs="slider";
+        slideshow.left="slideleft";
+        slideshow.right="slideright";
+        slideshow.scrollSpeed=4;
+        slideshow.spacing=5;
+        slideshow.active="#fff";
+        slideshow.init("slideshow","image","imgprev","imgnext","imglink");
+        }
+    </script>
+
+    <lift:manageSpecies.imageUpload form="post" multipart="true">
+        <choose:post>
+            <p>
+                Common name:
+                <ul:common_name></ul:common_name>
+                <br/>
+                Scientific name:
+                <ul:scientific_name></ul:scientific_name>
+                <br/>
+                File name:
+                <ul:file_name></ul:file_name>
+                <br/>
+                MIME Type:
+                <ul:mime_type></ul:mime_type>
+                <br/>
+                File length:
+                <ul:length></ul:length>
+                <br/>
+                MD5 Hash:
+                <ul:md5></ul:md5>
+                <br/>
+            </p>
+        </choose:post>
+
+        <choose:get>
+            Select a file to upload:
+            <ul:file_upload></ul:file_upload>
+            <br/>
+            <input type="submit" value="Upload File"/>
+        </choose:get>
+    </lift:manageSpecies.imageUpload>
 
 </lift:surround>

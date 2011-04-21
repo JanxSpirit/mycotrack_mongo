@@ -56,7 +56,8 @@ object MenuInfo {
       Menu(Loc("events", List("events"), "Add Events", Hidden)),
       Menu(Loc("speciesInfo", List("speciesInfo"), "Species Info", Hidden)),
       Menu(Loc("manageSpecies", List("manageSpecies"), "Add Species", IfLoggedIn))) :::
-      User.sitemap :::
-      List[Menu](Menu("Help") / "help" / "index")
+      User.sitemap
+      //User.sitemap :::
+      //List[Menu](Menu("Help") / "help" / "index")
 
 }

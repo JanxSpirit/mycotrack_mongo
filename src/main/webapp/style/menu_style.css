@@ -12,7 +12,7 @@
 	height: 27px;
 	margin: 0;
 	padding: 0;
-	background: #000000 url(images/bg-bubplastic.gif) top left repeat-x;
+	background: #000000 url(/images/bg-bubplastic.gif) top left repeat-x;
 }
 .bubplastic.horizontal ul {
 	list-style: none;
@@ -23,7 +23,7 @@
 	float: left;
 	margin: 0;
 	padding: 0;
-	background: transparent url(images/bg-bubplastic-button.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-button.gif) top left no-repeat;
 }
 
 .bubplastic.horizontal ul li a {
@@ -44,7 +44,7 @@
 	height: 22px;
 	padding-top: 5px;
 	padding-right: 35px;
-	background: transparent url(images/bg-bubplastic-button.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-button.gif) top right no-repeat;
 	cursor: pointer;
 }
 /* END BUBBLE PLASTIC HORIZONTAL MENU */
@@ -71,7 +71,7 @@
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	background: transparent url(images/bg-bubplastic-button.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-button.gif) top left no-repeat;
 }
 
 .bubplastic.vertical ul li a {
@@ -84,7 +84,7 @@
 	font-size: 70%;
 	color: #FFFFFF;
 	text-decoration: none;
-	background: transparent url(images/bg-bubplastic-button.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-button.gif) top left no-repeat;
 }
 
 .bubplastic.vertical ul li a span.menu_ar {
@@ -94,7 +94,7 @@
 	height: 22px;
 	padding-top: 5px;
 	padding-right: 35px;
-	background: transparent url(images/bg-bubplastic-button.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-button.gif) top right no-repeat;
 	cursor: pointer;
 }
 /* END BUBBLE PLASTIC VERTICAL MENU */
@@ -104,87 +104,87 @@
 /* AQUA HOVER */
 .bubplastic.aqua ul li a:hover,
 .bubplastic.aqua ul li.highlight a {
-	background: transparent url(images/bg-bubplastic-h-aqua.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-aqua.gif) top left no-repeat;
 }
 .bubplastic.aqua ul li a:hover span.menu_ar,
 .bubplastic.aqua ul li.highlight a span.menu_ar {
-	background: transparent url(images/bg-bubplastic-h-aqua.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-aqua.gif) top right no-repeat;
 }
 
 
 /* BLUE HOVER */
 .bubplastic.blue ul li a:hover,
 .bubplastic.blue ul li.highlight a {
-	background: transparent url(images/bg-bubplastic-h-blue.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-blue.gif) top left no-repeat;
 }
 .bubplastic.blue ul li a:hover span.menu_ar,
 .bubplastic.blue ul li.highlight a span.menu_ar {
-	background: transparent url(images/bg-bubplastic-h-blue.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-blue.gif) top right no-repeat;
 }
 
 
 /* GRAY HOVER */
 .bubplastic.gray ul li a:hover,
 .bubplastic.gray ul li.highlight a {
-	background: transparent url(images/bg-bubplastic-h-gray.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-gray.gif) top left no-repeat;
 }
 .bubplastic.gray ul li a:hover span.menu_ar,
 .bubplastic.gray ul li.highlight a span.menu_ar {
-	background: transparent url(images/bg-bubplastic-h-gray.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-gray.gif) top right no-repeat;
 }
 
 
 /* LIME HOVER */
 .bubplastic.lime ul li a:hover,
 .bubplastic.lime ul li.highlight a {
-	background: transparent url(images/bg-bubplastic-h-lime.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-lime.gif) top left no-repeat;
 }
 .bubplastic.lime ul li a:hover span.menu_ar,
 .bubplastic.lime ul li.highlight a span.menu_ar {
-	background: transparent url(images/bg-bubplastic-h-lime.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-lime.gif) top right no-repeat;
 }
 
 
 /* ORANGE HOVER */
 .bubplastic.orange ul li a:hover,
 .bubplastic.orange ul li.highlight a {
-	background: transparent url(images/bg-bubplastic-h-orange.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-orange.gif) top left no-repeat;
 }
 .bubplastic.orange ul li a:hover span.menu_ar,
 .bubplastic.orange ul li.highlight a span.menu_ar {
-	background: transparent url(images/bg-bubplastic-h-orange.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-orange.gif) top right no-repeat;
 }
 
 
 /* PINK HOVER */
 .bubplastic.pink ul li a:hover,
 .bubplastic.pink ul li.highlight a {
-	background: transparent url(images/bg-bubplastic-h-pink.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-pink.gif) top left no-repeat;
 }
 .bubplastic.pink ul li a:hover span.menu_ar,
 .bubplastic.pink ul li.highlight a span.menu_ar {
-	background: transparent url(images/bg-bubplastic-h-pink.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-pink.gif) top right no-repeat;
 }
 
 
 /* PURPLE HOVER */
 .bubplastic.purple ul li a:hover,
 .bubplastic.purple ul li.highlight a {
-	background: transparent url(images/bg-bubplastic-h-purple.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-purple.gif) top left no-repeat;
 }
 .bubplastic.purple ul li a:hover span.menu_ar,
 .bubplastic.purple ul li.highlight a span.menu_ar {
-	background: transparent url(images/bg-bubplastic-h-purple.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-purple.gif) top right no-repeat;
 }
 
 
 /* RED HOVER */
 .bubplastic.red ul li a:hover,
 .bubplastic.red ul li.highlight a {
-	background: transparent url(images/bg-bubplastic-h-red.gif) top left no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-red.gif) top left no-repeat;
 }
 .bubplastic.red ul li a:hover span.menu_ar,
 .bubplastic.red ul li.highlight a span.menu_ar {
-	background: transparent url(images/bg-bubplastic-h-red.gif) top right no-repeat;
+	background: transparent url(/images/bg-bubplastic-h-red.gif) top right no-repeat;
 }
 
