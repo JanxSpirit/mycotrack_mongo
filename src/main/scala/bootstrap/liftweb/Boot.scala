@@ -6,16 +6,16 @@ import _root_.net.liftweb.widgets.menu.MenuWidget
 import net.liftweb.common.Full
 import com.mycotrack.model._
 import com.mycotrack.db._
-import com.mycotrack.lift.MycotrackUrlRewriter
 import net.liftweb.util.Helpers._
 import com.mycotrack.snippet.SelectedProject
 import com.mycotrack.snippet._
+import com.mycotrack.lift.{MycotrackAjaxRules, MycotrackUrlRewriter}
 
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
  */
-class Boot extends MycotrackUrlRewriter {
+class Boot extends MycotrackUrlRewriter with MycotrackAjaxRules {
   def boot {
     // where to search snippet
     LiftRules.addToPackages("com.mycotrack")
@@ -24,9 +24,6 @@ class Boot extends MycotrackUrlRewriter {
     LiftRules.setSiteMap(SiteMap(MenuInfo.menu: _*))
 
     MenuWidget init
-
-      LiftRules.ajaxStart = Full(() => LiftRules.jsArtifacts.show("loading").cmd)
-      LiftRules.ajaxEnd = Full(() => LiftRules.jsArtifacts.hide("loading").cmd)
 
       //Set up MongoDB
       MycoMongoDb.setup
@@ -55,6 +52,7 @@ object MenuInfo {
       Menu(Loc("createNote", List("createNote"), "Create Note", Hidden)),
       Menu(Loc("events", List("events"), "Add Events", Hidden)),
       Menu(Loc("speciesInfo", List("speciesInfo"), "Species Info", Hidden)),
+      Menu(Loc("splitProject", List("splitProject"), "Split Project", Hidden)),
       Menu(Loc("manageSpecies", List("manageSpecies"), "Add Species", IfLoggedIn))) :::
       User.sitemap
       //User.sitemap :::

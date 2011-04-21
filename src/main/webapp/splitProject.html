@@ -1,17 +1,14 @@
 <lift:surround with="default" at="content">
-    <h2>Create new project</h2>
+    <h2>Split project</h2>
 
     <p>
-        <lift:createProject.add form="POST" >
-            Species: <entry:species /><br />
-            Key: <entry:key />
-            Random Key: <entry:randomKey /><br />
+        <lift:manageProject.splitProject form="POST" >
             Substrate: <entry:substrate /><br />
             Substrate Preparation: <entry:substratePreparation /><br />
             Container: <entry:container /><br />
             Created: <entry:createdDate /><br />
             <entry:submit />
-        </lift:createProject.add>
+        </lift:manageProject.splitProject>
 
     <br />
     <br />

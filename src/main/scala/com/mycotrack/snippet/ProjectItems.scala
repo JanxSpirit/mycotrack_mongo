@@ -28,7 +28,7 @@ class ProjectItems extends Logger {
     SelectedProject(Empty)
   }
 
-  def showAddItem(node: NodeSeq): NodeSeq = {
+  /*def showAddItem(node: NodeSeq): NodeSeq = {
     ShowAddProject.get match {
       case 1 => {
         var name = ""
@@ -43,23 +43,21 @@ class ProjectItems extends Logger {
       }
       case _ => SHtml.link("create", () => ShowAddProject(1), <p>Add</p>)
     }
-  }
+  }*/
 
   def showEditItem(node: NodeSeq): NodeSeq = {
     if (SelectedProject.get != Empty) {
       var id = SelectedProject.get.open_!.id
       val project = Project.find(id).open_!
 
-      var name = project.name.is
-      var species = project.species.is
+      var key = project.key.is
       var substrate = project.substrate.is
 
       val template = TemplateFinder.findAnyTemplate(ITEM_TEMPLATE :: Nil).openOr(<p></p>)
       val content = bind("projectForm", template, "title" -> Text("Edit item"),
-        "name" -> SHtml.text(name, name = _),
-        "species" -> SHtml.hidden(() => {species = species}),
+        "key" -> SHtml.text(key, key = _),
         "substrate" -> SHtml.hidden(() => {substrate = substrate}),
-        "submit" -> SHtml.submit("save", () => saveItem(id, name)),
+        "submit" -> SHtml.submit("save", () => project.save),
         "close" -> SHtml.link("index", () => clear, Text("close")))
 
       <div>{content}</div>
@@ -72,11 +70,13 @@ class ProjectItems extends Logger {
   def list(node: NodeSeq): NodeSeq = {
     val currentUser = User.currentUser.open_!
 
+    val projects = Project.findAll("userId" -> currentUser.id.toString)
+
     Project.findAll("userId" -> currentUser.id.toString) match {
       case Nil => Text("There is no items in database")
-      case projects => projects.flatMap(i => bind("project", node, "name" -> getEditLink(i),
-        "species" -> speciesLink(i.species.is),
-        "substrate" -> speciesLink(i.substrate.is),
+      case projects => projects.flatMap(i => bind("project", node, "key" -> getEditLink(i),
+        "species" -> speciesLink(i.culture.obj.open_!.species.obj.open_!),
+        "substrate" -> i.substrate.is,
 //        "createdDate" -> {
 //          i.createdDate
 //        },
@@ -88,34 +88,15 @@ class ProjectItems extends Logger {
     SHtml.link("create", () => {}, Text("New Project"))
   }
 
-  def speciesLink(commonName: String): NodeSeq = {
-    val species = Species.find("commonName" -> "shiitake").open_!
+  def speciesLink(species: Species): NodeSeq = {
     val url = "http://" + species.infoUrl.is
     info("Got species link: " + url)
 
     <span><a href={url}>{species.commonName.is}</a></span>
   }
 
-  private def addItem(name: String): Any = {
-    val project = new Project
-    project.name(name)
-
-    saveItem(project)
-  }
-
-  private def saveItem(id: ObjectId, name: String): Any = {
-    val item = Project.find(id).open_!
-    item.name(name)
-
-    saveItem(item)
-  }
-
-  private def saveItem(project: Project): Any = {
-    project.save
-  }
-
   private def getEditLink(project: Project): NodeSeq = {
-    <a href={"projects/" + project.id.toString}>{project.name.is}</a>
+    <a href={"projects/" + project.id.toString}>{project.key.is}</a>
   }
 
   private def getAddEventLink(project: Project): NodeSeq = {

@@ -33,6 +33,13 @@ trait MycotrackUrlRewriter {
       theSpecies(species)
       RewriteResponse(ParsePath("speciesInfo" :: Nil, "", true, false), Map.empty, true)
     }
+  }.append {
+    case RewriteRequest(
+    ParsePath("splitProject" :: id :: Nil, "", true, false), _, _) => {
+      val project = Project.find(id)
+      SelectedProject(project)
+      RewriteResponse(ParsePath("splitProject" :: Nil, "", true, false), Map.empty, true)
+    }
   }
 
 }

@@ -8,6 +8,7 @@ import com.mycotrack.model.{Species, Culture, Project, User}
 import net.liftweb.common._
 import com.mongodb._
 import com.mongodb.casbah.Imports._
+import com.mongodb.casbah.Implicits._
 import net.liftweb.json.JsonDSL._
 import net.liftweb.record.field._
 
@@ -24,7 +25,7 @@ class Library extends Logger {
             case Nil => Text("No cultures.")
             case cultures => cultures.flatMap(c => bind("culture", node,
                                                                 "cultureType" -> {c.cultureType},
-                                                                "species" -> {c.species},
+                                                                "species" -> {c.species.obj.open_!.commonName},
                                                                 "createdDate" -> {c.createdDate.toString},
                                                                 "remove" -> getRemoveLink(c)))
         }
@@ -40,7 +41,7 @@ class Library extends Logger {
     var createdDate = culture.createdDate
 
     Helpers.bind("culture", xhtml,
-      "species" -> SHtml.select(Species.findAll.map(s => s.commonName.is -> s.commonName.is), Empty, culture.species(_)),
+      "species" -> SHtml.select(Species.findAll.map(s => s.id.toString -> s.commonName.is), Empty, culture.species.setFromString(_)),
       "cultureType" -> SHtml.text("", culture.cultureType(_)),
       "createdDate" -> createdDate.toForm,
       "submit" -> SHtml.submit("Add", () => {

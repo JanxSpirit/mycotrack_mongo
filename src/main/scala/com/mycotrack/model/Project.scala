@@ -17,12 +17,22 @@ class Project extends MongoRecord[Project] with MongoId[Project] {
     override def displayName = "Name"
   }
 
-  object species extends StringField(this,100){
-    override def displayName = "Species"
+  object culture extends ObjectIdField(this){
+    def obj = Culture.find(value)
+  }
+
+  object key extends StringField(this, 100) {
+    override def displayName = "Key"
   }
 
   object substrate extends StringField(this,100){
     override def displayName = "Substrate"
+  }
+
+  object randomKey extends BooleanField(this)
+
+  object container extends StringField(this,100){
+    override def displayName = "Container"
   }
 
   object preparation extends StringField(this,100){
@@ -31,6 +41,10 @@ class Project extends MongoRecord[Project] with MongoId[Project] {
 
   object userId extends ObjectIdField(this) {
     def obj = User.find(value)
+  }
+
+  object parentProject extends ObjectIdField(this) {
+    def obj = Project.find(value)
   }
 
   object notes extends MongoJsonObjectListField[Project, Note](this, Note)
