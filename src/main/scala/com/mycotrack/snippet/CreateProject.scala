@@ -6,9 +6,10 @@ import net.liftweb.http.{S, SHtml}
 import Helpers._
 import net.liftweb.common.{Empty, Full}
 import com.mycotrack.model.{Species, Project, User, Culture}
-import com.mycotrack.lib.ChartGenerator
+import com.mycotrack.db.MycoMongoDb
 import java.util.Date
 import net.liftweb.json.JsonDSL._
+import com.mycotrack.lib.{ProjectEncodeType, ChartGenerator, UrlShortener}
 
 
 /**
@@ -17,7 +18,7 @@ import net.liftweb.json.JsonDSL._
  */
 
 
-class CreateProject extends ChartGenerator {
+class CreateProject extends ChartGenerator with UrlShortener {
   def create(in: NodeSeq): NodeSeq =
     Helpers.bind("p", in, "form" -> "This is gonna be a form: ")
 
@@ -33,16 +34,19 @@ class CreateProject extends ChartGenerator {
       "culture" -> SHtml.select(Culture.findAll("userId" -> tempUser.id.toString).map(xs => xs.key.is -> xs.id.toString), Empty, culture.setFromString(_)),
       "substratePreparation" -> SHtml.select(List("none" -> "none", "pasteurized" -> "pasteurized", "sterilized" -> "sterilized"), Full("none"), proj.preparation(_)),
       "container" -> SHtml.select(List("none" -> "none", "Jar - quart" -> "Jar - quart", "Jar - pint" -> "Jar - pint", "Bag - filter" -> "Bag - filter"), Full("none"), proj.container(_)),
-      "randomKey" -> SHtml.checkbox(false, proj.randomKey(_)),
-      "key" -> SHtml.text("", proj.key(_)),
+      "randomKey" -> SHtml.checkbox(false, proj.randomKey(_), "id" -> "keyCheckbox", "onchange" -> "randomKeyToggle();"),
+      "key" -> SHtml.text("", proj.key(_), "id" -> "keyText"),
       "substrate" -> SHtml.text("", proj.substrate(_)),
       "name" -> SHtml.text("", proj.name(_)),
       "createdDate" -> createdDate.toForm,
       "submit" -> SHtml.submit("Add", () => {
         proj.userId.set(tempUser.id)
         //proj.createdDate(new Date)
+
         println(proj)
-        proj.save;
+        proj.save
+        if (proj.randomKey.is) proj.key(defaultShortener.getHashCode(ProjectEncodeType.code ^ MycoMongoDb.incrementMasterCounter))
+        proj.save
         createQRCode("www.google.com", Empty, Empty, proj.id)
         S.redirectTo("/manage")
       }))

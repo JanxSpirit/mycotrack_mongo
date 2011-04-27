@@ -20,7 +20,7 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
   val logback = "ch.qos.logback" % "logback-classic" % "0.9.28" % "compile->default"
 
   //casbah
-  val casbah = "com.mongodb.casbah" %% "casbah" % "2.0.3"
+  val casbah = "com.mongodb.casbah" %% "casbah" % "2.1.2"
 
   //rogue mongo DSL
   //val rogue = "com.foursquare" % "rogue_2.8.0" % "1.0.3" % "compile->default"

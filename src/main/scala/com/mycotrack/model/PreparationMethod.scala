@@ -6,4 +6,8 @@ package com.mycotrack.model
  */
 
 
-class PreparationMethod
+object PreparationMethod extends Enumeration {
+  val Pasteurized = Value("Pasteurized")
+  val Sterilized = Value("Sterilized")
+  val None = Value("None")
+}

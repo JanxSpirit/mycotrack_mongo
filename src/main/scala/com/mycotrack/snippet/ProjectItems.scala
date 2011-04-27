@@ -75,7 +75,8 @@ class ProjectItems extends Logger {
     Project.findAll("userId" -> currentUser.id.toString) match {
       case Nil => Text("There is no items in database")
       case projects => projects.flatMap(i => bind("project", node, "key" -> getEditLink(i),
-        "species" -> speciesLink(i.culture.obj.open_!.species.obj.open_!),
+        "key" -> i.key.is,
+        "species" -> speciesLink(i),
         "substrate" -> i.substrate.is,
 //        "createdDate" -> {
 //          i.createdDate
@@ -88,11 +89,15 @@ class ProjectItems extends Logger {
     SHtml.link("create", () => {}, Text("New Project"))
   }
 
-  def speciesLink(species: Species): NodeSeq = {
+  def speciesLink(project: Project): NodeSeq = {
+    /*val culture = project.culture.obj.openOr(project.culture.defaultValue)
+    val species = culture.species.obj.openOr(culture.species.defaultvalue)
+
     val url = "http://" + species.infoUrl.is
     info("Got species link: " + url)
 
-    <span><a href={url}>{species.commonName.is}</a></span>
+    <span><a href={url}>{species.commonName.is}</a></span>*/
+    <span><a href='blah'>www.google.com</a></span>
   }
 
   private def getEditLink(project: Project): NodeSeq = {

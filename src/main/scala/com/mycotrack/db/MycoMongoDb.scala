@@ -1,7 +1,5 @@
 package com.mycotrack.db
 
-;
-
 import _root_.net.liftweb.mongodb._
 import _root_.net.liftweb.util._
 import _root_.net.liftweb.common._
@@ -12,6 +10,9 @@ import net.liftweb.json.JsonDSL._
 import com.mongodb.casbah.gridfs.Imports._
 import com.mongodb.{Mongo, BasicDBObject, BasicDBObjectBuilder, DBObject}
 import com.mongodb.casbah.MongoConnection
+import com.mongodb._
+import com.mongodb.casbah.Imports._
+import net.liftweb.json.JsonDSL._
 
 object MycoMongoDb {
 
@@ -34,6 +35,20 @@ object MycoMongoDb {
     catch {
       case e => false
     }
+  }
+
+  def incrementMasterCounter: Int = {
+
+    val seqColl = MongoConnection()("mycotrack")("seq")
+
+    val seq = seqColl.findAndModify(MongoDBObject("_id" -> "projects"), MongoDBObject("seq" -> 1), MongoDBObject("_id" -> 1), false, com.mongodb.casbah.Imports.$inc ("seq" -> 1), true, true).get
+    seq.getAs[Int]("seq").get
+
+    //val counter = counterColl.findOne.get
+
+    //counterColl.update(counter, $inc("value" -> 1), true, false)
+    //counterColl.update(counter, "value" -> 1, true, false)
+
   }
 
 }
