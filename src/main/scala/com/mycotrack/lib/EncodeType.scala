@@ -8,4 +8,4 @@ package com.mycotrack.lib
 
 sealed trait EncodeType { def code: Int}
 case object ProjectEncodeType extends EncodeType {val code = 100000}
-case object CultureEncodeType extends EncodeType {val code = 2222}
+case object CultureEncodeType extends EncodeType {val code = 1000000}

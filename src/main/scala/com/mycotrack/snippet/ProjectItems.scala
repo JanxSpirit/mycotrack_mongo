@@ -75,7 +75,7 @@ class ProjectItems extends Logger {
     Project.findAll("userId" -> currentUser.id.toString) match {
       case Nil => Text("There is no items in database")
       case projects => projects.flatMap(i => bind("project", node, "key" -> getEditLink(i),
-        "key" -> i.key.is,
+        "key" -> getEditLink(i),
         "species" -> speciesLink(i),
         "substrate" -> i.substrate.is,
 //        "createdDate" -> {
@@ -101,7 +101,7 @@ class ProjectItems extends Logger {
   }
 
   private def getEditLink(project: Project): NodeSeq = {
-    <a href={"projects/" + project.id.toString}>{project.key.is}</a>
+    <a href={"projects/" + project.key.is}>{project.key.is}</a>
   }
 
   private def getAddEventLink(project: Project): NodeSeq = {

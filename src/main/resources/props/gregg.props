@@ -3,3 +3,4 @@ mongodb_port=27017
 mongodb_db_name=mycotrack
 
 images_gridfs_name=mycotrack_images
+mongodb_counter_coll=masterCounter

@@ -31,11 +31,11 @@ class CreateProject extends ChartGenerator with UrlShortener {
     var culture = proj.culture
 
     Helpers.bind("entry", xhtml,
-      "culture" -> SHtml.select(Culture.findAll("userId" -> tempUser.id.toString).map(xs => xs.key.is -> xs.id.toString), Empty, culture.setFromString(_)),
+      "culture" -> SHtml.select(Culture.findAll("userId" -> tempUser.id.toString).map(xs => xs.key.is -> xs.key.is), Empty, culture.setFromString(_)),
       "substratePreparation" -> SHtml.select(List("none" -> "none", "pasteurized" -> "pasteurized", "sterilized" -> "sterilized"), Full("none"), proj.preparation(_)),
-      "container" -> SHtml.select(List("none" -> "none", "Jar - quart" -> "Jar - quart", "Jar - pint" -> "Jar - pint", "Bag - filter" -> "Bag - filter"), Full("none"), proj.container(_)),
-      "randomKey" -> SHtml.checkbox(false, proj.randomKey(_), "id" -> "keyCheckbox", "onchange" -> "randomKeyToggle();"),
-      "key" -> SHtml.text("", proj.key(_), "id" -> "keyText"),
+      "container" -> SHtml.select(List("none" -> "none", "Jar - quart" -> "Jar - quart", "Jar - pint" -> "Jar - pint", "Bag - filter" -> "Bag - filter", "Tub - plastic" -> "Tub - plastic"), Full("none"), proj.container(_)),
+      "randomKey" -> SHtml.checkbox(true, proj.randomKey(_), "id" -> "keyCheckbox", "onchange" -> "randomKeyToggle();"),
+      "key" -> SHtml.text("", proj.key(_), "id" -> "keyText", "disabled" -> "true"),
       "substrate" -> SHtml.text("", proj.substrate(_)),
       "name" -> SHtml.text("", proj.name(_)),
       "createdDate" -> createdDate.toForm,

@@ -9,13 +9,17 @@ import _root_.net.liftweb.http._
 import net.liftweb.common.Full
 import com.mycotrack.model._
 import com.mycotrack.snippet._
+import com.mongodb._
+import com.mongodb.casbah.Imports._
+import com.mongodb.casbah.Implicits._
+
 
 trait MycotrackUrlRewriter {
 
   LiftRules.statelessRewrite.append {
     case RewriteRequest(
-    ParsePath("projects" :: id :: Nil, "", true, false), _, _) => {
-      val project = Project.find(id)
+    ParsePath("projects" :: key :: Nil, "", true, false), _, _) => {
+      val project = Project.find(MongoDBObject("key" -> key))
       SelectedProject(project)
       RewriteResponse("events" :: Nil)
     }

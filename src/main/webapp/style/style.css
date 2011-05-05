@@ -40,6 +40,8 @@ padding: 0;
     width:94%;
     height: 10000px;
 }
+#keyText {
+}
 body {
 font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 color: #4f6b72;

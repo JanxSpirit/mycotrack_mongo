@@ -36,6 +36,8 @@ class Culture extends MongoRecord[Culture] with MongoId[Culture] {
     def obj = Species.find(value)
   }
 
+  object randomKey extends BooleanField(this)
+
 }
 
 object Culture extends Culture with MongoMetaRecord[Culture] {
