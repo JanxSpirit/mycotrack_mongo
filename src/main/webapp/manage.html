@@ -1,5 +1,7 @@
 <lift:surround with="default" at="content">
-    <h2>Manage projects</h2>
+    <div id="pageTitle">
+        <h2>Manage projects</h2>
+    </div>
 
     <p>
 
@@ -22,18 +24,27 @@
             </lift:projectItems.list>
     </table>-->
 
-    <lift:projectItems.list>
-        <ul id="projectList">
-            <li id="projectItem">
-
-                <span>Key: <project:key /></span>
-                <span>Species: <project:species /></span>
-                <span>Substrate: <project:substrate /></span>
-               
-                <span><project:remove /></span>
+    <div id="listContent">
+        <ul>
+            <li class="projectItemHeader">
+                <div class="projectKeyHeader">Key</div>
+                <div class="projectSpeciesHeader">Species</div>
+                <div class="projectSubstrateHeader">Substrate</div>
             </li>
+            <lift:projectItems.list>
+
+                    <li class="projectItem">
+
+                        <div class="projectKey"><project:key />&nbsp;</div>
+                        <div class="projectSpecies"><project:species />&nbsp;</div>
+                        <div class="projectSubstrate"><project:substrate />&nbsp;</div>
+
+                        <div class="projectDelete"><project:remove /></div>
+                    </li>
+
+            </lift:projectItems.list>
         </ul>
-    </lift:projectItems.list>
+    </div>
 
     <!--<lift:projectItems.showAddItem form="POST" />
     <lift:projectItems.showEditItem form="POST" />-->

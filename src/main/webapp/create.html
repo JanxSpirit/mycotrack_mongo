@@ -1,14 +1,21 @@
 <lift:surround with="default" at="content">
-    <h2>Create new project</h2>
+    <div id="pageTitle">
+        <h2>Create new project</h2>
+    </div>
 
     <p>
         <lift:createProject.add form="POST" >
-            Key: <entry:key />
-            Random Key: <entry:randomKey /><br />
-            Culture: <entry:culture /><br />
-            Substrate: <entry:substrate /><br />
-            Substrate Preparation: <entry:substratePreparation /><br />
-            Container: <entry:container /><br />
+            <div id="generalSection">
+                Key: <entry:key />
+                Random Key: <entry:randomKey /><br />
+                Culture: <entry:culture /><br />
+            </div>
+            <div id="substrateSection">
+                Substrate: <entry:substrate /><br />
+                Substrate Preparation: <entry:substratePreparation /><br />
+                Container: <entry:container /><br />
+            </div>
+
             Created: <entry:createdDate /><br />
             <entry:submit />
         </lift:createProject.add>
