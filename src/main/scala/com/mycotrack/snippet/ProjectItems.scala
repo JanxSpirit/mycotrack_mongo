@@ -1,7 +1,6 @@
 package com.mycotrack.snippet
 
 import xml.{Text, NodeSeq}
-import com.mycotrack.model.{Project, Species, User}
 import net.liftweb.http.{RequestVar, S, TemplateFinder, SHtml}
 import net.liftweb.util.{Helpers, Log}
 import Helpers._
@@ -10,6 +9,7 @@ import org.bson.types.ObjectId
 import com.mongodb._
 import com.mongodb.casbah.Imports._
 import net.liftweb.json.JsonDSL._
+import com.mycotrack.model.{Culture, Project, Species, User}
 
 /**
  * @author chris_carrier
@@ -90,14 +90,20 @@ class ProjectItems extends Logger {
   }
 
   def speciesLink(project: Project): NodeSeq = {
-    /*val culture = project.culture.obj.openOr(project.culture.defaultValue)
-    val species = culture.species.obj.openOr(culture.species.defaultvalue)
+    val species = project.culture.obj match {
+      case Empty => new Species
+      case Full(c) => c.species.obj match {
+        case Empty => new Species
+        case Full(s) => s
+      }
+    }
+    //val species = culture.species.obj.openOr(culture.species.obj.defaultvalue)
 
-    val url = "http://" + species.infoUrl.is
+    val url = "http://" + species.asInstanceOf[Species].infoUrl.is
     info("Got species link: " + url)
 
-    <span><a href={url}>{species.commonName.is}</a></span>*/
-    <span><a href='blah'>www.google.com</a></span>
+    <span><a href={url}>{species.asInstanceOf[Species].commonName.is}</a></span>
+    //<span><a href='blah'>www.google.com</a></span>
   }
 
   private def getEditLink(project: Project): NodeSeq = {
@@ -111,7 +117,7 @@ class ProjectItems extends Logger {
   }
 
   private def getRemoveLink(project: Project): NodeSeq = {
-    SHtml.link("create", removeProject(project), Text("delete"))
+    SHtml.link("manage", removeProject(project), Text("delete"))
   }
 
   private def removeProject(project: Project): () => Any = {

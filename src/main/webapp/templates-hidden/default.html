@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:lift="http://liftweb.net/">
 <head>
 
-    <link href="/style/slideshow_style.css" rel="stylesheet" />
+    <link href="/style/slideshow_style.css" rel="stylesheet"/>
     <link href="/style/style.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 
 
@@ -27,29 +27,45 @@
     <link href="/style/menu_style.css" type="text/css" rel="stylesheet" media="screen, projection"/>
     <link href="/style/table.css" type="text/css" rel="stylesheet" media="screen, projection"/>-->
 
+    <!-- [if IE]>
+    <style type="text/css">
+    .mainbody{height: 100%;}
+    </style>
+    <![endif]-->
+
     <title>Mycotrack</title>
 </head>
 <body>
-<div id="page">
-
-    <div id="title_header">
-        <h1>Mycotrack</h1>
-    </div>
-
-    <div id="banner">
-        <img src="../images/spore_print.jpg" alt=""/>
-    </div>
-    <div id="menu" class="bubplastic horizontal aqua">
-        <lift:MenuSnippet.render/>
-    </div>
-    <br/>
-    <br/>
-
-   <!-- <div id="content">-->
-    <div>
-        <lift:bind name="content"/>
-    </div>
-    <lift:msgs/>
+<div id="banner">
+    <img src="../images/spore_print.jpg" alt=""/>
 </div>
+<div id="hdr">
+    <span id="title_header">
+        <h1>Mycotrack</h1>
+    </span>
+    <span id="menu" class="bubplastic horizontal aqua">
+        <lift:MenuSnippet.render/>
+    </span>
+</div>
+
+<!-- left column -->
+<div id="lh-col"><br/>
+    <h4>Manage</h4>
+
+    <br/>
+    <br/>
+
+    <div class="lhMenuItem"><lift:Menu.item name="home" donthide="true" /></div>
+    <div class="lhMenuItem"><lift:Menu.item name="manage" donthide="true" /></div>
+    <div class="lhMenuItem"><lift:Menu.item name="library" donthide="true" /></div>
+    <div class="lhMenuItem"><lift:Menu.item name="manageSpecies" donthide="true" /></div>
+</div>
+<!-- end of left column -->
+<!-- <div id="content">-->
+<div id="content">
+    <lift:bind name="content"/>
+</div>
+<lift:msgs/>
+
 </body>
 </html>

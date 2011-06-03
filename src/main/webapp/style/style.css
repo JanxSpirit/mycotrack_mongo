@@ -1,21 +1,48 @@
 * { margin:0px; padding: 0px; }
 
+html{margin:0;height:100%}
+body {
+    font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    margin: 0;
+     padding:0;
+     background: #808080;
+     color: #333333;
+     height:100%;
+}
+
 #menu {
-    width: 100%;
     padding-bottom: 1em;
-    display: block;
+    display: inline;
     list-style: none;
+    float: right;
+    position: relative;
+    z-index: 10;
 }
 #banner {
     width: 100%;
-    height: 150px;
+    height: 95px;
     overflow:hidden;
-    position:relative;
-    top:-1em;
-    z-index:9;
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
 }
+#hdr{
+ height:45px;
+ background:#c0c0c0;
+ color:#000000;
+ border:solid #000000;
+ border-width:2px 0px;
+ margin:40px 0 0 0;
+ position: relative;
+ z-index: 10;
+ }
 #title_header {
     text-align:left;
+    float: left;
+    position: relative;
+    z-index: 10;
 }
 #title_header h1 {
     color:#2D2722;
@@ -24,18 +51,34 @@
     letter-spacing:-1px;
     text-shadow:-1px 1px 2px #FFFFFF;
     text-transform:lowercase;
-    z-index:10;
-    position:relative;
 }
+#lh-col{
+ position: absolute;
+ top: 99px;
+ left: 20px;
+ width: 180px;
+ border: 2px solid #000000;
+ background: #c0c0c0;
+ color: #333333;
+ margin: 0px;
+ padding: 0px;
+ height: 400px;
+ text-align: center;
+ }
 #content {
-    padding: 25px;
-    background: #e8e0dc;
+    margin: 10px 20px 20px 220px;
+ border: 2px solid #000000;
+ background: #ffffff;
+ color: #333333;
+ padding: 20px;
+ position :relative;
+ min-height: 100%;
 }
 #page {
-    width:850px;
+    width:1024px;
     margin: 0 auto;
     text-align:left;
-    max-width:850px;
+    max-width:1024px;
     min-width:610px;
     padding:0;
     overflow:hidden;
@@ -58,11 +101,7 @@
     border: 1px solid grey;
     padding:1em;
 }
-body {
-    font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-    color: #4f6b72;
-    background: #e8e0dc;
-}
+
 #listContent ul {
     list-style: none;
     margin-left: 0;
@@ -72,6 +111,14 @@ body {
 #listContent {
     width:100%;
     background: #E1DAD5;
+}
+.lhMenuItem {
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    padding-top:1em;
+    padding-bottom:1em;
 }
 .projectItem {
     border: 1px solid #CCFFFF;
