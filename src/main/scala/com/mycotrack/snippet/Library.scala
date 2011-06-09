@@ -29,7 +29,7 @@ class Library extends Logger with UrlShortener {
                                                                 "cultureType" -> {c.cultureType},
                                                                 "key" -> c.key,
                                                                 "species" -> {c.species.obj.open_!.commonName},
-                                                                "createdDate" -> {c.createdDate.toString},
+                                                                "createdDate" -> {c.createdDate.is.getTime.toString},
                                                                 "remove" -> getRemoveLink(c)))
         }
   }
