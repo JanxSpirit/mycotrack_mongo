@@ -2,6 +2,7 @@
 <head>
 
     <link href="/style/slideshow_style.css" rel="stylesheet"/>
+
     <link href="/style/style.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 
 
@@ -29,11 +30,12 @@
 
     <!-- [if IE]>
     <style type="text/css">
-    .mainbody{height: 100%;}
+        .mainbody{height: 100%;}
     </style>
     <![endif]-->
 
     <title>Mycotrack</title>
+    <link href="/style/sf-style.css" rel="stylesheet"/>
 </head>
 <body>
 <div id="banner">
@@ -43,8 +45,18 @@
     <span id="title_header">
         <h1>Mycotrack</h1>
     </span>
-    <span id="menu" class="bubplastic horizontal aqua">
-        <lift:MenuSnippet.render/>
+    <span id="menu">
+            <ul class="sf-menu sf-js-enabled sf-shadow">
+                <li>
+                    <lift:Menu.item name="Login" />
+                </li>
+                <li>
+                    <lift:Menu.item name="CreateUser" />
+                </li>
+                <li>
+                    <lift:Menu.item name="LostPassword" />
+                </li>
+            </ul>
     </span>
 </div>
 
@@ -55,10 +67,18 @@
     <br/>
     <br/>
 
-    <div class="lhMenuItem"><lift:Menu.item name="home" donthide="true" /></div>
-    <div class="lhMenuItem"><lift:Menu.item name="manage" donthide="true" /></div>
-    <div class="lhMenuItem"><lift:Menu.item name="library" donthide="true" /></div>
-    <div class="lhMenuItem"><lift:Menu.item name="manageSpecies" donthide="true" /></div>
+    <div class="lhMenuItem">
+        <lift:Menu.item name="home" donthide="true"/>
+    </div>
+    <div class="lhMenuItem">
+        <lift:Menu.item name="manage" donthide="true"/>
+    </div>
+    <div class="lhMenuItem">
+        <lift:Menu.item name="library" donthide="true"/>
+    </div>
+    <div class="lhMenuItem">
+        <lift:Menu.item name="manageSpecies" donthide="true"/>
+    </div>
 </div>
 <!-- end of left column -->
 <!-- <div id="content">-->

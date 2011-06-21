@@ -203,11 +203,11 @@ body {
 /* BLUE HOVER */
 .menuitem a:hover,
 .menuitem a {
-    background: transparent url(../images/bg-bubplastic-h-blue.gif) top left no-repeat;
+    background: transparent url(../images/bg-bubplastic-h-gray.gif) top left no-repeat;
 }
 .selecedmenuitem a:hover,
 .selecedmenuitem a {
-    background: transparent url(../images/bg-bubplastic-h-blue.gif) top right no-repeat;
+    background: transparent url(../images/bg-bubplastic-h-gray.gif) top right no-repeat;
 }
 
 .input {
